@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>Browse</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-list>
+		<!-- browse sermons link to /sermons -->
+		<ion-item button routerLink="/browse/sermons" detail>
+			<ion-icon slot="start" name="mic"></ion-icon>
+			<ion-label>Sermons</ion-label>
+		</ion-item>
+		<!-- browse series -->
+		<ion-item button routerLink="/browse/series" detail>
+			<ion-icon slot="start" name="albums"></ion-icon>
+			<ion-label>Series</ion-label>
+		</ion-item>
+		<!-- browse speakers -->
+		<ion-item button routerLink="/browse/speakers" detail>
+			<ion-icon slot="start" name="people"></ion-icon>
+			<ion-label>Speakers</ion-label>
+		</ion-item>
+		<!-- browse books -->
+		<ion-item button routerLink="/browse/books" detail>
+			<ion-icon slot="start" name="book"></ion-icon>
+			<ion-label>Books</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

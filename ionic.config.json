@@ -1,0 +1,7 @@
+{
+  "name": "Sermo.nz",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

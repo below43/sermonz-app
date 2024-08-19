@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/browse"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Series</ion-title>
+		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+	@if (loading) {
+	<!--show an ion-list with ion-items as skeletons-->
+
+	<ion-list>
+		<ion-item>
+			<ion-thumbnail slot="start">
+				<ion-skeleton-text animated style="width: 60px; height: 60px;"></ion-skeleton-text>
+			</ion-thumbnail>
+			<ion-label>
+				<h3>
+					<ion-skeleton-text animated style="width: 100px;"></ion-skeleton-text>
+				</h3>
+				<p>
+					<ion-skeleton-text animated style="width: 200px;"></ion-skeleton-text>
+				</p>
+			</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-thumbnail slot="start">
+				<ion-skeleton-text animated style="width: 60px; height: 60px;"></ion-skeleton-text>
+			</ion-thumbnail>
+			<ion-label>
+				<h3>
+					<ion-skeleton-text animated style="width: 100px;"></ion-skeleton-text>
+				</h3>
+				<p>
+					<ion-skeleton-text animated style="width: 200px;"></ion-skeleton-text>
+				</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+	}
+	@else if (!seriesList || seriesList.row_count === 0) {
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>No Series Found</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<p>There are no series available at this time.</p>
+		</ion-card-content>
+	</ion-card>
+	}
+	@else {
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{ seriesList.row_count }} Series</ion-card-title>
+		</ion-card-header>
+	</ion-card>
+
+	<!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="search($event)" placeholder="Search Series" showCancelButton="focus" debounce="500" animated>
+	</ion-searchbar> -->
+
+	<ion-list>
+		<ion-item *ngFor="let series of seriesList.series" [routerLink]="['/series', series.series_id]">
+			<ion-thumbnail slot="start">
+				<img [src]="series.series_thumb" />
+			</ion-thumbnail>
+			<ion-label>
+				<h2>{{ series.series_name }}</h2>
+				<p>{{ series.first_sermon_date | date: 'mediumDate' }} - {{ series.last_sermon_date | date: 'mediumDate' }}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+
+	}
+	<!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+		</ion-infinite-scroll-content>
+	</ion-infinite-scroll> -->
+
+</ion-content>
