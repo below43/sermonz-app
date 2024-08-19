@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BrowsePageRoutingModule } from './browse-routing.module';
 
 import { BrowsePage } from './browse.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BrowsePageRoutingModule
+    BrowsePageRoutingModule,
+	SharedModule
   ],
   declarations: [BrowsePage]
 })

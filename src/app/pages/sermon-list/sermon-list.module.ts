@@ -17,4 +17,4 @@ import { SermonListPage } from './sermon-list.page';
   ],
   declarations: [SermonListPage]
 })
-export class SermonsPageModule {}
+export class SermonListPageModule {}

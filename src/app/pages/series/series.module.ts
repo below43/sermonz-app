@@ -4,16 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SeriePageRoutingModule } from './series-routing.module';
+import { SeriesPageRoutingModule } from './series-routing.module';
 
 import { SeriesPage } from './series.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SeriePageRoutingModule
+    SeriesPageRoutingModule
   ],
   declarations: [SeriesPage]
 })

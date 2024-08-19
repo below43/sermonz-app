@@ -4,7 +4,11 @@
 
 export const environment = {
 	production: false,
-	apiUrl: 'https://sermons.latimerchurch.nz/api/v1'
+	apiUrl: '',
+	appName: '',
+	home: '',
+	homeUrl: '',
+	copyright: '',
 };
 
 /*

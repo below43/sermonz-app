@@ -21,7 +21,7 @@ const routes: Routes = [
 					},
 					{
 						path: 'sermons',
-						loadChildren: () => import('../pages/sermon-list/sermon-list.module').then(m => m.SermonsPageModule)
+						loadChildren: () => import('../pages/sermon-list/sermon-list.module').then(m => m.SermonListPageModule)
 					},
 					{
 						path: 'sermons/:id',
@@ -29,7 +29,7 @@ const routes: Routes = [
 					},
 					{
 						path: 'series',
-						loadChildren: () => import('../pages/series-list/series-list.module').then(m => m.SeriesPageModule)
+						loadChildren: () => import('../pages/series-list/series-list.module').then(m => m.SeriesListPageModule)
 					},
 					{
 						path: 'series/:id',
@@ -37,7 +37,7 @@ const routes: Routes = [
 					},
 					{
 						path: 'speakers',
-						loadChildren: () => import('../pages/speaker-list/speakers.module').then(m => m.SpeakersPageModule)
+						loadChildren: () => import('../pages/speaker-list/speaker-list.module').then( m => m.SpeakerListPageModule)
 					},
 					{
 						path: 'speakers/:id',
