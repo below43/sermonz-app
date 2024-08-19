@@ -70,3 +70,4 @@ testem.log
 Thumbs.db
 
 src/environments/*.dev.ts
+.vscode/
