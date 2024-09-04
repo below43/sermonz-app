@@ -70,7 +70,7 @@
 		<ion-list>
 			<ion-item lines="inset" *ngFor="let series of seriesList.series" [routerLink]="['/series', series.series_id]" detail="true">
 				<ion-thumbnail slot="start" class="letterbox-thumbnail">
-					<img [src]="series.series_thumb" />
+					<ion-img [src]="series.series_thumb" />
 				</ion-thumbnail>
 				<ion-label>
 					<h2>{{ series.series_name }}</h2>
