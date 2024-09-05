@@ -14,7 +14,8 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SeriesPageRoutingModule
+    SeriesPageRoutingModule,
+	SharedModule
   ],
   declarations: [SeriesPage]
 })

@@ -1,8 +1,45 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>series</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/browse"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{title}}</ion-title>
+		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	<app-fixed-grid>
+		<ng-container *ngIf="loading">
+
+		</ng-container>
+		<ng-container *ngIf="!loading && series">
+			<!-- Show series information -->
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>{{series.series_name}}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+					<ion-img src="{{series.series_thumb}}" alt="Series Thumbnail" class="series-thumbnail"></ion-img>
+					<p>{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}</p>
+				</ion-card-content>
+			</ion-card>
+
+			<!-- Show the sermons for the series -->
+			<ion-list *ngIf="sermons">
+				<ion-item *ngFor="let sermon of sermons" [routerLink]="['/sermon', sermon.sermon_id]">
+					<ion-thumbnail slot="start">
+						<ion-img [src]="sermon.sermon_image" alt="Sermon Thumbnail"></ion-img>
+					</ion-thumbnail>
+					<ion-label>
+						<h3>{{sermon.sermon_title}}</h3>
+						<p>{{sermon.sermon_date | date: 'mediumDate'}}</p>
+					</ion-label>
+				</ion-item>
+			</ion-list>
+		</ng-container>
+	</app-fixed-grid>
 </ion-content>

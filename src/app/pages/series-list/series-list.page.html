@@ -68,7 +68,7 @@
 		<!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="search($event)" placeholder="Search Series" showCancelButton="focus" debounce="500" animated>
 	</ion-searchbar> -->
 		<ion-list>
-			<ion-item lines="inset" *ngFor="let series of seriesList.series" [routerLink]="['/series', series.series_id]" detail="true">
+			<ion-item lines="inset" *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]" detail="true">
 				<ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="series.series_thumb" />
 				</ion-thumbnail>

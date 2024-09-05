@@ -101,14 +101,19 @@ export class ApiService
 	}
 
 	// Cached version for getSeriesById
-	public getSeriesByIdCached(id: number, cacheMilliseconds: number = 60000): Observable<Series>
+	public getSeriesByIdCached(id: string, refreshCache = false): Observable<Series>
 	{
+		const cacheMilliseconds = 1 * 60 * 60000 * 24; //24 hour
 		const cacheKey = `${environment.apiUrl}series-id-${id}`;
+		if (refreshCache)
+		{
+			this.cacheService.clear(cacheKey);
+		}
 		return this.cacheService.get(cacheKey, this.getSeriesById(id), cacheMilliseconds);
 	}
 
 	///api/v1/series/{id} - Lists speakers
-	private getSeriesById(id: number): Observable<Series>
+	private getSeriesById(id: string): Observable<Series>
 	{
 		return this.httpClient.get<Series>(`${environment.apiUrl}/series/${id}`);
 	}
