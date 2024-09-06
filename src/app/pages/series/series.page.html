@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/browse/series"></ion-back-button>
 		</ion-buttons>
-		<ion-title>Series</ion-title>
+		<ion-title>View series</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 	</ion-toolbar>
 </ion-header>
@@ -52,10 +52,10 @@
 		@else {
 		<ion-row class="filters">
 			<ion-col>
-				<p class="filter-left">{{ sermonsList.row_count }} sermons found</p>
+				<p class="filter-left">{{ sermonsList.row_count | number }} sermons found</p>
 			</ion-col>
 			<ion-col>
-				<p class="filter-right">Ordered by date</p>
+				<p class="filter-right">Ordered by date <ion-icon name="arrow-up"></ion-icon></p>
 			</ion-col>
 		</ion-row>
 

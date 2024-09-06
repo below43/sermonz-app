@@ -114,6 +114,10 @@ ion-note {
   color: var(--ion-color-medium-shade);
 }
 
-ion-item.selected {
+
+ion-menu-toggle ion-label {
+	--color: var(--ion-color-dark-tint);
+}
+ion-menu-toggle ion-item.selected  {
   --color: var(--ion-color-primary);
 }

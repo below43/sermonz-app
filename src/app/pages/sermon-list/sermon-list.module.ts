@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SermonListPageRoutingModule } from './sermon-list-routing.module';
 
 import { SermonListPage } from './sermon-list.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SermonListPageRoutingModule
+    SermonListPageRoutingModule,
+	SharedModule
   ],
   declarations: [SermonListPage]
 })

@@ -38,19 +38,14 @@ export class SeriesPage implements OnInit
 	loadingSermons: boolean = false;
 	loadingMore: boolean = false;
 	series: Series | null = null;
-
-	sermons: any | null = null;
+	sermonsList: SermonsList | null = null;
 
 	handleRefresh(event: any)
 	{
 		this.series = null;
-		this.sermons = null;
+		this.sermonsList = null;
 		this.loadSeriesObject(true, event);
 		this.loadSermonsObject(true, event);
-		// setTimeout(() =>
-		// {
-		// 	// Any calls to load data go here
-		// }, 1000);
 	}
 
 	loadSeriesObject(refresh: boolean, event?: any)
@@ -112,7 +107,6 @@ export class SeriesPage implements OnInit
 			});
 	}
 
-	sermonsList: SermonsList | null = null;
 	loadSermonsObject(refresh: boolean, event?: any)
 	{
 		if (event)

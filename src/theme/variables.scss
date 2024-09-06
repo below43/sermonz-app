@@ -1,26 +1,40 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
 :root {
-	--ion-color-primary: #9A1860;
-	--ion-color-primary-rgb: 154,24,96;
-	--ion-color-primary-contrast: #ffffff;
-	--ion-color-primary-contrast-rgb: 255,255,255;
-	--ion-color-primary-shade: #881554;
-	--ion-color-primary-tint: #a42f70;
+	// --ion-color-primary: #453A82;
+	// --ion-color-primary-rgb: 64,58,96;
+	// --ion-color-primary-contrast: #ffffff;
+	// --ion-color-primary-contrast-rgb: 255,255,255;
+	// --ion-color-primary-shade: #383354;
+	// --ion-color-primary-tint: #534e70;
 
-	--ion-color-secondary: #01aaad;
-	--ion-color-secondary-rgb: 1,170,173;
-	--ion-color-secondary-contrast: #000000;
-	--ion-color-secondary-contrast-rgb: 0,0,0;
-	--ion-color-secondary-shade: #019698;
-	--ion-color-secondary-tint: #1ab3b5;
+	// --ion-color-secondary: #DA4726;
+	// --ion-color-secondary-rgb: 218,71,38;
+	// --ion-color-secondary-contrast: #000000;
+	// --ion-color-secondary-contrast-rgb: 0,0,0;
+	// --ion-color-secondary-shade: #c03e21;
+	// --ion-color-secondary-tint: #de593c;
 
-	--ion-color-tertiary: #0b35b1;
-	--ion-color-tertiary-rgb: 11,53,177;
+	--ion-color-primary: #DA4726;
+	--ion-color-primary-rgb: 218,71,38;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-primary-contrast-rgb: 0,0,0;
+    --ion-color-primary-shade: #c03e21;
+    --ion-color-primary-tint: #de593c;
+
+    --ion-color-secondary: #453A82;
+    --ion-color-secondary-rgb: 64,58,96;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255,255,255;
+    --ion-color-secondary-shade: #383354;
+    --ion-color-secondary-tint: #534e70;
+
+	--ion-color-tertiary: #5B5269;
+	--ion-color-tertiary-rgb: 91,82,105;
 	--ion-color-tertiary-contrast: #ffffff;
 	--ion-color-tertiary-contrast-rgb: 255,255,255;
-	--ion-color-tertiary-shade: #0a2f9c;
-	--ion-color-tertiary-tint: #2349b9;
+	--ion-color-tertiary-shade: #50485c;
+	--ion-color-tertiary-tint: #6b6378;
 
 	--ion-color-success: #2dd55b;
 	--ion-color-success-rgb: 45,213,91;
