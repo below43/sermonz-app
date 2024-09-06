@@ -40,7 +40,7 @@
 				<ion-avatar slot="start">{{ speaker.initials }}</ion-avatar>
 				<ion-label>
 					<h2>{{ speaker.name }}</h2>
-					<p>{{ speaker.sermon_count}} sermons</p>
+					<p>{{ speaker.sermon_count}} talk{{ speaker.sermon_count > 1 ? 's':''}}</p>
 				</ion-label>
 			</ion-item>
 		</ion-list>

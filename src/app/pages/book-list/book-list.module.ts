@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BookListPageRoutingModule } from './book-list-routing.module';
 
 import { BookListPage } from './book-list.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BookListPageRoutingModule
+    BookListPageRoutingModule,
+	SharedModule
   ],
   declarations: [BookListPage]
 })

@@ -119,9 +119,14 @@ export class ApiService
 	}
 
 	// Cached version for getBooks
-	public getBooksCached(cacheMilliseconds: number = 60000): Observable<string[]>
+	public getBookListCached(refreshCache = false): Observable<string[]>
 	{
+		const cacheMilliseconds = 1 * 60 * 60000 * 24; //24 hours
 		const cacheKey = `${environment.apiUrl}books`;
+		if (refreshCache)
+		{
+			this.cacheService.clear(cacheKey);
+		}
 		return this.cacheService.get(cacheKey, this.getBooks(), cacheMilliseconds);
 	}
 
@@ -134,7 +139,7 @@ export class ApiService
 	// Cached version for getSpeakers
 	public getSpeakersCached(refreshCache: boolean = false): Observable<Speaker[]>
 	{
-		const cacheMilliseconds = 1 * 60 * 60000 * 24; //24 hour
+		const cacheMilliseconds = 1 * 60 * 24; //24 hour
 		const cacheKey = `${environment.apiUrl}speakers`;
 		if (refreshCache)
 		{

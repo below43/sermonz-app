@@ -1,13 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>book-list</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/browse"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Browse by book of the Bible</ion-title>
+		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">book-list</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	<app-fixed-grid>
+		@if (loading) 
+		{
+		<app-skeleton type="list"></app-skeleton>
+		}
+		@else if (!bookList || bookList.length === 0) 
+		{
+		<ion-row class="filters">
+			<ion-col>
+				<p style="margin-top: 0; font-size: 12px; text-align: left; width: 100%">No books found</p>
+			</ion-col>
+		</ion-row>
+		}
+		@else {
+		<ion-row class="filters">
+			<ion-col>
+				<p class="filter-left">{{ bookList.length | number }} books found</p>
+			</ion-col>
+			<ion-col>
+				<p class="filter-right">Ordered canonically<ion-icon name="arrow-down"></ion-icon></p>
+			</ion-col>
+		</ion-row>
+
+		<ion-list>
+			<ion-item lines="inset" *ngFor="let book of bookList" [routerLink]="book.active ? ['/browse/books/', book.name] : null" [detail]="book.active" [class.active]="book.active" [class.inactive]="!book.active">				<ion-label>
+					<h2>{{ book.name }}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+		}
+
+	</app-fixed-grid>
 </ion-content>
