@@ -42,7 +42,7 @@
 				<ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="series.series_thumb" />
 				</ion-thumbnail>
-				<ion-label>
+				<ion-label class="ion-text-nowrap">
 					<h2>{{ series.series_name }}</h2>
 					<p>{{ series.first_sermon_date | date: 'mediumDate' }} - {{ series.last_sermon_date | date: 'mediumDate' }}</p>
 				</ion-label>

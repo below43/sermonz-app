@@ -64,10 +64,10 @@
 				<!-- <ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="sermon.series_thumb" />
 				</ion-thumbnail> -->
-				<ion-note slot="start" style="margin-left: 10px; margin-right: 30px; margin-top: 6px;">{{sermon.row_index}}</ion-note>
-				<ion-label>
+				<ion-avatar slot="start" style="font-size: 12px; text-align: center; padding-top: 10px;">{{sermon.row_index}}</ion-avatar>
+				<ion-label class="ion-text-nowrap">
 					<h2>{{ sermon.sermon_title }}</h2>
-					<p>{{ sermon.sermon_date | date: 'mediumDate' }} | {{sermon.passage}}</p>
+					<p>{{ sermon.sermon_date | date: 'mediumDate' }} &#8226; {{sermon.speaker_name}}</p>
 				</ion-label>
 			</ion-item>
 		</ion-list>

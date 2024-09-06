@@ -23,7 +23,7 @@ export class SermonListPage implements OnInit, ViewDidEnter
 		private titleService: TitleService
 	) { }
 
-	title: string = 'Browse sermons';
+	title: string = 'Search';
 	ngOnInit()
 	{
 		this.titleService.setTitle(this.title);

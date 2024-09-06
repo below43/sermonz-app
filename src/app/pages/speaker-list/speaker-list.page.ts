@@ -40,6 +40,7 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 	loading: boolean = false;
 	loadingMore: boolean = false;
 	speakersList: Speaker[] | null = null;
+	highFrequencyList: Speaker[] | null = null;
 
 	handleRefresh(event: any)
 	{
