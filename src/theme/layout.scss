@@ -35,8 +35,18 @@ ion-item[detail="true"] {
 
 app-fixed-grid ion-grid.fixed h1 {
 	margin-top: 34px;
-    font-size: 22px;
-    font-weight: 600;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+app-fixed-grid ion-grid.fixed ion-card-content h1 {
+	margin-top: 30px;
+}
+
+@media screen and (min-width: 1300px) {
+	app-fixed-grid ion-grid.fixed ion-card-content h1 {
+		margin-top: 56px;
+	}
 }
 
 ion-row.filters {
@@ -46,4 +56,19 @@ ion-row.filters {
 }
 //ng deep
 :host ::ng-deep {
+}
+
+ion-row.filters ion-col {
+	p {
+		margin-top: 0;
+		font-size: 12px;
+		text-align: right;
+		width: 100%;
+		&.filter-left {
+			text-align: left;
+		}
+		&.filter-right {
+			text-align: right;
+		}
+	}
 }

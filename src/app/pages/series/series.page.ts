@@ -4,6 +4,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
+import { SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -29,11 +30,12 @@ export class SeriesPage implements OnInit
 		const id = this.activatedRoute.snapshot.paramMap.get('id');
 		this.id = id;
 
-
-		this.loadObject(false);
+		this.loadSeriesObject(false);
+		this.loadSermonsObject(false);
 	}
 
 	loading: boolean = false;
+	loadingSermons: boolean = false;
 	loadingMore: boolean = false;
 	series: Series | null = null;
 
@@ -41,19 +43,20 @@ export class SeriesPage implements OnInit
 
 	handleRefresh(event: any)
 	{
-		this.loading = true;
 		this.series = null;
 		this.sermons = null;
-		this.loadObject(true, event);
+		this.loadSeriesObject(true, event);
+		this.loadSermonsObject(true, event);
 		// setTimeout(() =>
 		// {
 		// 	// Any calls to load data go here
 		// }, 1000);
 	}
 
-	loadObject(refresh: boolean, event?: any)
+	loadSeriesObject(refresh: boolean, event?: any)
 	{
 		this.loading = true;
+		this.loadingSermons = true;
 
 		if (!this.id)
 		{
@@ -99,7 +102,63 @@ export class SeriesPage implements OnInit
 						message: 'An error occurred while loading the series.',
 						buttons: ['OK']
 					}).then(alert => alert.present());
+
 					this.loading = false;
+					if (event)
+					{
+						event.target.complete();
+					}
+				}
+			});
+	}
+
+	sermonsList: SermonsList | null = null;
+	loadSermonsObject(refresh: boolean, event?: any)
+	{
+		if (event)
+		{
+			this.loadingMore = true;
+		}
+		else
+		{
+			this.loadingSermons = true;
+		}
+
+		const pageNumber = this.sermonsList ? this.sermonsList.page_number : 1;
+		const seriesId = parseInt(this.id || '0');
+		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, '', '', 0, seriesId, 'sermon_date', 'desc')
+			.pipe(
+				timeout(constants.defaultTimeout)
+			).subscribe({
+				next: (response: SermonsList) =>
+				{
+					console.log(response);
+					if (this.sermonsList && !refresh)
+					{
+						this.sermonsList.sermons = this.sermonsList.sermons.concat(response.sermons);
+						this.sermonsList.page_number = response.page_number;
+						this.sermonsList.row_count = response.row_count;
+					}
+					else
+					{
+						this.sermonsList = response;
+					}
+					this.loadingSermons = false;
+					this.loadingMore = false;
+					if (event)
+					{
+						event.target.complete();
+					}
+				},
+				error: (error: any) =>
+				{
+					console.error(error);
+					this.alertController.create({
+						header: 'Error',
+						message: 'An error occurred while loading the sermons.',
+						buttons: ['OK']
+					}).then(alert => alert.present());
+					this.loadingSermons = false;
 					this.loadingMore = false;
 					if (event)
 					{
@@ -109,4 +168,18 @@ export class SeriesPage implements OnInit
 			});
 
 	}
+
+	loadData(event: any)
+	{
+		if (this.sermonsList && this.sermonsList.page_number < (this.sermonsList.row_count /  this.sermonsList.page_size))
+		{
+			this.sermonsList.page_number++;
+			this.loadSermonsObject(false, event);
+		}
+		else if (event)
+		{
+			event.target.complete();
+		}
+	}
+
 }

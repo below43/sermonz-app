@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button defaultHref="/browse"></ion-back-button>
+			<ion-back-button defaultHref="/browse/series"></ion-back-button>
 		</ion-buttons>
-		<ion-title>{{title}}</ion-title>
+		<ion-title>Series</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 	</ion-toolbar>
 </ion-header>
@@ -13,33 +13,72 @@
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-fixed-grid>
-		<ng-container *ngIf="loading">
 
-		</ng-container>
-		<ng-container *ngIf="!loading && series">
+		@if (loading) 
+		{
+		<app-skeleton type="header"></app-skeleton>
+		}
+		@else if (series) 
+		{
 			<!-- Show series information -->
 			<ion-card>
-				<ion-card-header>
-					<ion-card-title>{{series.series_name}}</ion-card-title>
-				</ion-card-header>
 				<ion-card-content>
-					<ion-img src="{{series.series_thumb}}" alt="Series Thumbnail" class="series-thumbnail"></ion-img>
-					<p>{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}</p>
+					<ion-row>
+						<ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+							<ion-img src="{{series.series_thumb}}" alt="Series Thumbnail" class="series-thumbnail"></ion-img>
+						</ion-col>
+						<ion-col sizeXs="12" sizeSm="12" sizeMd="7" offsetMd="1">
+							<h1>{{series.series_name}}</h1>
+							<p>{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}</p>
+						</ion-col>
+					</ion-row>
 				</ion-card-content>
 			</ion-card>
+		}
 
-			<!-- Show the sermons for the series -->
-			<ion-list *ngIf="sermons">
-				<ion-item *ngFor="let sermon of sermons" [routerLink]="['/sermon', sermon.sermon_id]">
-					<ion-thumbnail slot="start">
-						<ion-img [src]="sermon.sermon_image" alt="Sermon Thumbnail"></ion-img>
-					</ion-thumbnail>
-					<ion-label>
-						<h3>{{sermon.sermon_title}}</h3>
-						<p>{{sermon.sermon_date | date: 'mediumDate'}}</p>
-					</ion-label>
-				</ion-item>
-			</ion-list>
-		</ng-container>
+
+		@if (loadingSermons) 
+		{
+		<app-skeleton type="list"></app-skeleton>
+		}
+		@else if (!sermonsList || sermonsList.row_count === 0) 
+		{
+		<ion-row class="filters">
+			<ion-col>
+				<p style="margin-top: 0; font-size: 12px; text-align: left; width: 100%">No sermons found</p>
+			</ion-col>
+		</ion-row>
+		}
+		@else {
+		<ion-row class="filters">
+			<ion-col>
+				<p class="filter-left">{{ sermonsList.row_count }} sermons found</p>
+			</ion-col>
+			<ion-col>
+				<p class="filter-right">Ordered by date</p>
+			</ion-col>
+		</ion-row>
+
+		<ion-list>
+			<ion-item lines="inset" *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/listen/', sermon.sermon_id]" detail="true">
+				<!-- <ion-thumbnail slot="start" class="letterbox-thumbnail">
+					<ion-img [src]="sermon.series_thumb" />
+				</ion-thumbnail> -->
+				<ion-label>
+					<h2>{{ sermon.sermon_title }}</h2>
+					<p>{{ sermon.sermon_date | date: 'mediumDate' }} | {{sermon.passage}}</p>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+		}
+		@if (loadingMore)
+		{
+		<app-skeleton type="list"></app-skeleton>
+		}
+
+		<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" style="margin-top: 20px;">
+			<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more series...">
+			</ion-infinite-scroll-content>
+		</ion-infinite-scroll>
 	</app-fixed-grid>
 </ion-content>
