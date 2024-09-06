@@ -64,6 +64,7 @@
 				<!-- <ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="sermon.series_thumb" />
 				</ion-thumbnail> -->
+				<ion-note slot="start" style="margin-left: 10px; margin-right: 30px; margin-top: 6px;">{{sermon.row_index}}</ion-note>
 				<ion-label>
 					<h2>{{ sermon.sermon_title }}</h2>
 					<p>{{ sermon.sermon_date | date: 'mediumDate' }} | {{sermon.passage}}</p>

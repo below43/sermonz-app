@@ -126,7 +126,7 @@ export class SeriesPage implements OnInit
 
 		const pageNumber = this.sermonsList ? this.sermonsList.page_number : 1;
 		const seriesId = parseInt(this.id || '0');
-		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, '', '', 0, seriesId, 'sermon_date', 'desc')
+		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, '', '', 0, seriesId, 'sermon_date', 'asc')
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({
@@ -142,6 +142,15 @@ export class SeriesPage implements OnInit
 					else
 					{
 						this.sermonsList = response;
+					}
+
+					if (this.sermonsList!=null)
+					{
+						//append a row index to the sermons
+						this.sermonsList.sermons.forEach((sermon, index) =>
+						{
+							sermon.row_index = index + 1;
+						});
 					}
 					this.loadingSermons = false;
 					this.loadingMore = false;
@@ -171,7 +180,7 @@ export class SeriesPage implements OnInit
 
 	loadData(event: any)
 	{
-		if (this.sermonsList && this.sermonsList.page_number < (this.sermonsList.row_count /  this.sermonsList.page_size))
+		if (this.sermonsList && this.sermonsList.page_number < (this.sermonsList.row_count / this.sermonsList.page_size))
 		{
 			this.sermonsList.page_number++;
 			this.loadSermonsObject(false, event);
