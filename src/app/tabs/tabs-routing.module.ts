@@ -20,14 +20,6 @@ const routes: Routes = [
 						loadChildren: () => import('../pages/browse/browse.module').then(m => m.BrowsePageModule)
 					},
 					{
-						path: 'sermons',
-						loadChildren: () => import('../pages/sermon-list/sermon-list.module').then(m => m.SermonListPageModule)
-					},
-					{
-						path: 'sermons/:id',
-						loadChildren: () => import('../pages/sermon/sermon.module').then(m => m.SermonPageModule)
-					},
-					{
 						path: 'series',
 						loadChildren: () => import('../pages/series-list/series-list.module').then(m => m.SeriesListPageModule)
 					},
@@ -55,11 +47,20 @@ const routes: Routes = [
 			},
 			{
 				path: 'search',
-				loadChildren: () => import('../pages/search/search.module').then(m => m.SearchPageModule)
+				loadChildren: () => import('../pages/sermon-list/sermon-list.module').then(m => m.SermonListPageModule)
 			},
 			{
 				path: 'play',
-				loadChildren: () => import('../pages/play/play.module').then(m => m.PlayPageModule)
+				children: [
+					{
+						path: '',
+						loadChildren: () => import('../pages/play/play.module').then(m => m.PlayPageModule)
+					},
+					{
+						path: 'sermons/:id',
+						loadChildren: () => import('../pages/sermon/sermon.module').then(m => m.SermonPageModule)
+					},
+				]
 			},
 			{
 				path: '',

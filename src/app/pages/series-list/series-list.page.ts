@@ -1,26 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ViewDidEnter } from '@ionic/angular';
 import { Subject, takeUntil, timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { ApiService } from 'src/app/services/api.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
 	selector: 'app-series-list',
 	templateUrl: './series-list.page.html',
 	styleUrls: ['./series-list.page.scss'],
 })
-export class SeriesListPage implements OnInit
+export class SeriesListPage implements OnInit, ViewDidEnter
 {
 
 	constructor(
 		private apiService: ApiService,
-		private alertController: AlertController
+		private alertController: AlertController,
+		private titleService: TitleService
 	) { }
 
+	title: string = 'Browse series';
 	ngOnInit()
 	{
+		this.titleService.setTitle(this.title);
 		this.loadObject(false);
+	}
+
+	ionViewDidEnter()
+	{
+		this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;

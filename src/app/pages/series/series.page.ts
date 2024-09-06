@@ -1,37 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
 	selector: 'app-series',
 	templateUrl: './series.page.html',
 	styleUrls: ['./series.page.scss'],
 })
-export class SeriesPage implements OnInit
+export class SeriesPage implements OnInit, ViewDidEnter
 {
 
 	id: string | null = null;
-	title: string = 'Series';
-
+	
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute,
-		private navController: NavController
+		private navController: NavController,
+		private titleService: TitleService
 	) { }
 
+	title: string = 'Series';
 	ngOnInit()
 	{
+		this.titleService.setTitle(this.title);
 		const id = this.activatedRoute.snapshot.paramMap.get('id');
 		this.id = id;
 
 		this.loadSeriesObject(false);
 		this.loadSermonsObject(false);
+	}
+
+	ionViewDidEnter()
+	{
+		this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;
@@ -82,7 +90,8 @@ export class SeriesPage implements OnInit
 					this.series = response;
 
 					this.title = `Series: ${response.series_name}`;
-
+					this.titleService.setTitle(this.title);
+					
 					this.loading = false;
 					if (event)
 					{

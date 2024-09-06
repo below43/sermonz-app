@@ -6,20 +6,20 @@
 
 <ion-content [fullscreen]="true">
 	<app-fixed-grid>
-		<h1>Browse</h1>
+		<h1>{{title}}</h1>
 		<p><ion-text color="medium">Choose a category to browse</ion-text></p>
 		<ion-list>
 			<!-- browse sermons link to /sermons -->
-			<ion-item button routerLink="/browse/sermons" detail>
+			<!-- <ion-item button routerLink="/browse/sermons" detail>
 				<ion-icon slot="start" name="mic"></ion-icon>
 				<ion-label>Sermons</ion-label>
-			</ion-item>
+			</ion-item> -->
 			<!-- browse series -->
 			<ion-item button routerLink="/browse/series" detail>
 				<ion-icon slot="start" name="albums"></ion-icon>
 				<ion-label>Series</ion-label>
 			</ion-item>
-			<!-- browse speakers -->
+			<!-- browse speakers -->s
 			<ion-item button routerLink="/browse/speakers" detail>
 				<ion-icon slot="start" name="people"></ion-icon>
 				<ion-label>Speakers</ion-label>

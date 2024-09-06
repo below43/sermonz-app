@@ -1,33 +1,44 @@
 
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Title } from '@angular/platform-browser';
+import { AlertController, ViewDidEnter } from '@ionic/angular';
 import { Subject, takeUntil, timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Book } from 'src/app/models/books.model';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { ApiService } from 'src/app/services/api.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
 	selector: 'app-book-list',
 	templateUrl: './book-list.page.html',
 	styleUrls: ['./book-list.page.scss'],
 })
-export class BookListPage implements OnInit
+export class BookListPage implements OnInit, ViewDidEnter
 {
 
 	constructor(
 		private apiService: ApiService,
-		private alertController: AlertController
+		private alertController: AlertController,
+		private titleService: TitleService
 	) { }
 
+	title: string  = 'Browse books of the Bible';
 	ngOnInit()
 	{
+		this.titleService.setTitle(this.title);
 		this.loadObject(false);
+	}
+
+	ionViewDidEnter()
+	{
+		this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;
 	loadingMore: boolean = false;
 	bookList: Book[] | null = null;
+	booksActive: number = 0;
 
 	handleRefresh(event: any)
 	{
@@ -54,6 +65,8 @@ export class BookListPage implements OnInit
 				next: (response: string[]) =>
 				{
 					console.log(response);
+
+					this.booksActive = response.length;
 
 					let bookList = constants.booksOfTheBible.map(book =>
 					{

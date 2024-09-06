@@ -1,30 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-sermon-list',
   templateUrl: './sermon-list.page.html',
   styleUrls: ['./sermon-list.page.scss'],
 })
-export class SermonListPage implements OnInit 
+export class SermonListPage implements OnInit, ViewDidEnter
 {
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute,
-		private navController: NavController
+		private navController: NavController,
+		private titleService: TitleService
 	) { }
 
+	title: string = 'Browse sermons';
 	ngOnInit()
 	{
-
+		this.titleService.setTitle(this.title);
 		this.loadSermonsObject(false);
+	}
+
+	ionViewDidEnter()
+	{
+		this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;

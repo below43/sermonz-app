@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/browse"></ion-back-button>
 		</ion-buttons>
-		<ion-title>Browse by book of the Bible</ion-title>
+		<ion-title>{{title}}</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 	</ion-toolbar>
 </ion-header>
@@ -28,10 +28,10 @@
 		@else {
 		<ion-row class="filters">
 			<ion-col>
-				<p class="filter-left">{{ bookList.length | number }} books found</p>
+				<p class="filter-left">{{booksActive}} / {{ bookList.length | number }} books found</p>
 			</ion-col>
 			<ion-col>
-				<p class="filter-right">Ordered canonically<ion-icon name="arrow-down"></ion-icon></p>
+				<p class="filter-right">Ordered canonically <ion-icon name="arrow-down"></ion-icon></p>
 			</ion-col>
 		</ion-row>
 
