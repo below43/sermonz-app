@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/browse"></ion-back-button>
@@ -6,13 +6,17 @@
 		<ion-title>{{title}}</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loadingSermons"></ion-progress-bar>
 	</ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
 	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-fixed-grid>
+		<app-header>
+		<h1>{{title}}</h1>
+		</app-header>
+		
 		@if (loadingSermons)
 		{
 		<app-skeleton type="list"></app-skeleton>

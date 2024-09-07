@@ -6,8 +6,10 @@
 
 <ion-content [fullscreen]="true">
 	<app-fixed-grid>
-		<h1>{{title}}</h1>
-		<p><ion-text color="medium">Choose a category to browse</ion-text></p>
+		<app-header>
+			<h1>{{title}}</h1>
+			<p><ion-text color="medium">Choose a category to browse</ion-text></p>
+		</app-header>
 		<ion-list>
 			<!-- browse sermons link to /sermons -->
 			<!-- <ion-item button routerLink="/browse/sermons" detail>

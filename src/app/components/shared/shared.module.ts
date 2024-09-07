@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FixedGridComponent } from './fixed-grid/fixed-grid.component';
 import { IonicModule } from '@ionic/angular';
 import { SkeletonComponent } from './skeleton/skeleton.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
 @NgModule({
   declarations: [
 	FixedGridComponent,
-	SkeletonComponent
+	SkeletonComponent,
+	HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
   ],
   exports: [
 	FixedGridComponent,
-	SkeletonComponent
+	SkeletonComponent,
+	HeaderComponent
   ]
 })
 export class SharedModule { }

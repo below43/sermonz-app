@@ -71,7 +71,7 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 						var name = speaker.name;
 						//change to alpha characters only
 						name = name.replace(/[^a-zA-Z ]/g, '');
-						speaker.initials = name.split(' ').map((n: string) => n.charAt(0)).join('');
+						speaker.initials = name.split(' ').map((n: string) => n.charAt(0)).join('').toUpperCase();
 						if (speaker.initials.length > 2)
 						{
 							speaker.initials = speaker.initials.substr(0, 2);

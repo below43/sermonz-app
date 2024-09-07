@@ -89,7 +89,7 @@ export class SeriesPage implements OnInit, ViewDidEnter
 					console.log(response);
 					this.series = response;
 
-					this.title = `Series: ${response.series_name}`;
+					this.title = `${response.series_name}`;
 					this.titleService.setTitle(this.title);
 					
 					this.loading = false;
