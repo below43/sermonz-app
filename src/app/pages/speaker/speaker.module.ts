@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SpeakerPageRoutingModule } from './speaker-routing.module';
 
 import { SpeakerPage } from './speaker.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SpeakerPageRoutingModule
+    SpeakerPageRoutingModule,
+	SharedModule
   ],
   declarations: [SpeakerPage]
 })

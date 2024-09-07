@@ -58,7 +58,7 @@
 <!-- Define the template for speaker items -->
 <ng-template #speakerItemTemplate let-speakers="speakers">
 	<ion-list>
-		<ion-item lines="inset" *ngFor="let speaker of speakers" [routerLink]="['/browse/speakers/', speaker.name]" detail="true">
+		<ion-item lines="inset" *ngFor="let speaker of speakers" [routerLink]="['/browse/speakers/', speaker.id]" detail="true">
 			<ion-avatar slot="start">{{ speaker.initials }}</ion-avatar>
 			<ion-label>
 				<h2>{{ speaker.name }}</h2>

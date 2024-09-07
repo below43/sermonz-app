@@ -155,9 +155,14 @@ export class ApiService
 	}
 
 	// Cached version for getSpeakerById
-	public getSpeakerByIdCached(id: number, cacheMilliseconds: number = 60000): Observable<Speaker>
+	public getSpeakerByIdCached(id: number, refreshCache: boolean = false): Observable<Speaker>
 	{
+		const cacheMilliseconds = 1 * 60 * 24; //24 hour
 		const cacheKey = `${environment.apiUrl}speaker-id-${id}`;
+		if (refreshCache)
+		{
+			this.cacheService.clear(cacheKey);
+		}
 		return this.cacheService.get(cacheKey, this.getSpeakerById(id), cacheMilliseconds);
 	}
 
