@@ -13,11 +13,11 @@
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-fixed-grid>
-		@if (loading) 
+		@if (loading)
 		{
 		<app-skeleton type="list"></app-skeleton>
 		}
-		@else if (!speakersList || speakersList.length === 0) 
+		@else if (!speakersList || speakersList.length === 0)
 		{
 		<ion-row class="filters">
 			<ion-col>
@@ -26,6 +26,8 @@
 		</ion-row>
 		}
 		@else {
+
+
 		<ion-row class="filters">
 			<ion-col>
 				<p class="filter-left">{{ speakersList.length | number }} speakers found</p>
@@ -35,16 +37,33 @@
 			</ion-col>
 		</ion-row>
 
+		<ion-list *ngIf="recentSpeakersList && recentSpeakersList.length">
+			<ion-list-header>
+				<ion-label>Recent speakers</ion-label>
+			</ion-list-header>
+			<ng-container *ngTemplateOutlet="speakerItemTemplate; context: {speakers: recentSpeakersList}"></ng-container>
+		</ion-list>
 		<ion-list>
-			<ion-item lines="inset" *ngFor="let speaker of speakersList" [routerLink]="['/browse/speakers/', speaker.name]" detail="true">
-				<ion-avatar slot="start">{{ speaker.initials }}</ion-avatar>
-				<ion-label>
-					<h2>{{ speaker.name }}</h2>
-					<p>{{ speaker.sermon_count}} talk{{ speaker.sermon_count > 1 ? 's':''}}</p>
-				</ion-label>
-			</ion-item>
+			<ion-list-header *ngIf="recentSpeakersList && recentSpeakersList.length">
+				<ion-label>All speakers</ion-label>
+			</ion-list-header>
+			<ng-container *ngTemplateOutlet="speakerItemTemplate; context: {speakers: speakersList}"></ng-container>
 		</ion-list>
 		}
 
 	</app-fixed-grid>
 </ion-content>
+
+
+<!-- Define the template for speaker items -->
+<ng-template #speakerItemTemplate let-speakers="speakers">
+	<ion-list>
+		<ion-item lines="inset" *ngFor="let speaker of speakers" [routerLink]="['/browse/speakers/', speaker.name]" detail="true">
+			<ion-avatar slot="start">{{ speaker.initials }}</ion-avatar>
+			<ion-label>
+				<h2>{{ speaker.name }}</h2>
+				<p>{{ speaker.sermon_count }} talk{{ speaker.sermon_count > 1 ? 's' : '' }}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+</ng-template>

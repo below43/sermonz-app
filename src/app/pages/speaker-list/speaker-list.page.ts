@@ -40,7 +40,7 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 	loading: boolean = false;
 	loadingMore: boolean = false;
 	speakersList: Speaker[] | null = null;
-	highFrequencyList: Speaker[] | null = null;
+	recentSpeakersList: Speaker[] | null = null;
 
 	handleRefresh(event: any)
 	{
@@ -65,7 +65,6 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 			).subscribe({
 				next: (response: Speaker[]) =>
 				{
-					console.log(response);
 					this.speakersList = response;
 					//set initials from speaker.name
 					this.speakersList.forEach(speaker => {
@@ -82,6 +81,48 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 							speaker.initials = speaker.initials + speaker.initials;
 						}
 					});
+
+					if (this.speakersList.length < 30) {
+						this.loading = false;
+						return;
+					}
+
+					const cacheMilliseconds = 1 * 60 * 60000 * 24 * 30; //1 month
+					this.apiService.getSermonsCached(refresh, 1, 99, '', '', undefined, undefined, 'sermon_date', 'desc', cacheMilliseconds)
+					.pipe(
+						timeout(constants.defaultTimeout)
+					).subscribe({
+						next: (response2: SermonsList) =>
+						{
+							console.log(response2);
+							if (!this.speakersList) throw new Error('Speakers list is empty.');
+
+							const speakerNames = response2.sermons.map(sermon => sermon.speaker_name);
+							this.recentSpeakersList = this.speakersList.filter(speaker => speakerNames.includes(speaker.name));					
+							this.loading = false;
+							
+							if (event)
+							{
+								event.target.complete();
+							}
+						},
+						error: (error: any) =>
+						{
+							console.error(error);
+							this.alertController.create({
+								header: 'Error',
+								message: 'An error occurred while loading the sermons.',
+								buttons: ['OK']
+							}).then(alert => alert.present());
+							this.loading = false;
+							this.loadingMore = false;
+							if (event)
+							{
+								event.target.complete();
+							}
+						}
+					});
+
 
 					this.loading = false;
 					
@@ -107,5 +148,6 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 				}
 			});
 
+			
 	}
 }

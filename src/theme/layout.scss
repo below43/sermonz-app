@@ -72,3 +72,9 @@ ion-row.filters ion-col {
 		}
 	}
 }
+
+
+ion-list-header ion-label {
+	color: var(--ion-color-medium);
+	text-transform: uppercase;
+}
