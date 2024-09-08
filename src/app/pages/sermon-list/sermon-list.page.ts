@@ -65,7 +65,7 @@ export class SermonListPage implements OnInit, ViewDidEnter
 			).subscribe({
 				next: (response: SermonsList) =>
 				{
-					console.log(response);
+					// console.log(response);
 					if (this.sermonsList && !refresh)
 					{
 						this.sermonsList.sermons = this.sermonsList.sermons.concat(response.sermons);
@@ -122,5 +122,11 @@ export class SermonListPage implements OnInit, ViewDidEnter
 		{
 			event.target.complete();
 		}
+	}
+
+	showHeader: boolean = false;
+	handleScroll(event:any) {
+	  const currentY = event.detail.scrollTop;
+	  this.showHeader = currentY > 60; 
 	}
 }

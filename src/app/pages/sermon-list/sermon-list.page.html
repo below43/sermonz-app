@@ -1,14 +1,14 @@
-<!-- <ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="showHeader">
 	<ion-toolbar>
-		<ion-buttons slot="start">
+		<!-- <ion-buttons slot="start">
 			<ion-back-button defaultHref="/browse"></ion-back-button>
-		</ion-buttons>
+		</ion-buttons> -->
 		<ion-title>{{title}}</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loadingSermons"></ion-progress-bar>
 	</ion-toolbar>
-</ion-header> -->
+</ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="handleScroll($any($event))">
 	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
