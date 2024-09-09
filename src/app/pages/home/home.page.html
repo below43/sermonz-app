@@ -1,17 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true" *ngIf="showHeader">
+	<ion-toolbar>
+		<ion-title>{{title}}</ion-title>
+		<ion-progress-bar type="indeterminate" *ngIf="loadingSermons"></ion-progress-bar>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-
-  <p>Recent sermons...</p>
-  <p>Recent series...</p>
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="handleScroll($any($event))">
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	<app-fixed-grid>
+		<app-header>
+		<h1>{{title}}</h1>
+		</app-header>
+	</app-fixed-grid>
 </ion-content>
+
+
+		
