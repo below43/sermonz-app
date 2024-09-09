@@ -4,16 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
+import { SeriesList } from 'src/app/models/series.model';
 import { SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
+import { environment } from 'src/environments/environment';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+	selector: 'app-home',
+	templateUrl: './home.page.html',
+	styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit, ViewDidEnter
 {
+	appName: string = environment.appName;
 
 	constructor(
 		private apiService: ApiService,
@@ -28,6 +31,7 @@ export class HomePage implements OnInit, ViewDidEnter
 	{
 		this.titleService.setTitle(this.title);
 		this.loadSermonsObject(false);
+		this.loadSeriesObject(false);
 	}
 
 	ionViewDidEnter()
@@ -35,17 +39,64 @@ export class HomePage implements OnInit, ViewDidEnter
 		this.titleService.setTitle(this.title);
 	}
 
-	loading: boolean = false;
+	loadingSeries: boolean = false;
 	loadingSermons: boolean = false;
 	loadingMore: boolean = false;
 	sermonsList: SermonsList | null = null;
+	seriesList: SeriesList | null = null;
 
 	handleRefresh(event: any)
 	{
 		this.sermonsList = null;
 		this.loadSermonsObject(true, event);
+		this.loadSeriesObject(true, event);
 	}
-	
+
+	loadSeriesObject(refresh: boolean, event?: any)
+	{
+		const pageNumber = 1;
+		this.apiService.getSeriesListCached(refresh, pageNumber, 5)
+			.pipe(
+				timeout(constants.defaultTimeout)
+			).subscribe({
+				next: (response: SeriesList) =>
+				{
+					console.log(response);
+					if (this.seriesList && !refresh)
+					{
+						this.seriesList.series = this.seriesList.series.concat(response.series);
+						this.seriesList.page_number = response.page_number;
+						this.seriesList.row_count = response.row_count;
+					}
+					else
+					{
+						this.seriesList = response;
+					}
+					this.loadingSeries = false;
+					this.loadingMore = false;
+					if (event)
+					{
+						event.target.complete();
+					}
+				},
+				error: (error: any) =>
+				{
+					console.error(error);
+					this.alertController.create({
+						header: 'Error',
+						message: 'An error occurred while loading the series.',
+						buttons: ['OK']
+					}).then(alert => alert.present());
+					this.loadingSeries = false;
+					this.loadingMore = false;
+					if (event)
+					{
+						event.target.complete();
+					}
+				}
+			});
+	}
+
 	loadSermonsObject(refresh: boolean, event?: any)
 	{
 		if (event)
@@ -57,9 +108,9 @@ export class HomePage implements OnInit, ViewDidEnter
 			this.loadingSermons = true;
 		}
 
-		const pageNumber = this.sermonsList ? this.sermonsList.page_number : 1;
-		
-		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, '', '', undefined, undefined, 'sermon_date', 'desc')
+		const pageNumber = 1;
+
+		this.apiService.getSermonsCached(refresh, pageNumber, 10, '', '', undefined, undefined, 'sermon_date', 'desc')
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({
@@ -77,7 +128,7 @@ export class HomePage implements OnInit, ViewDidEnter
 						this.sermonsList = response;
 					}
 
-					if (this.sermonsList!=null)
+					if (this.sermonsList != null)
 					{
 						//append a row index to the sermons
 						this.sermonsList.sermons.forEach((sermon, index) =>
@@ -125,8 +176,9 @@ export class HomePage implements OnInit, ViewDidEnter
 	}
 
 	showHeader: boolean = false;
-	handleScroll(event:any) {
-	  const currentY = event.detail.scrollTop;
-	  this.showHeader = currentY > 60; 
+	handleScroll(event: any)
+	{
+		const currentY = event.detail.scrollTop;
+		this.showHeader = currentY > 60;
 	}
 }

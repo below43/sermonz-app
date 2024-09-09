@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" *ngIf="showHeader">
 	<ion-toolbar>
 		<ion-title>{{title}}</ion-title>
-		<ion-progress-bar type="indeterminate" *ngIf="loadingSermons"></ion-progress-bar>
+		<ion-progress-bar type="indeterminate" *ngIf="loadingSermons || loadingSeries"></ion-progress-bar>
 	</ion-toolbar>
 </ion-header>
 
@@ -11,10 +11,56 @@
 	</ion-refresher>
 	<app-fixed-grid>
 		<app-header>
-		<h1>{{title}}</h1>
+			<h1>{{title}}</h1>
 		</app-header>
+		<p class="ion-hide-lg-up">Welcome to {{appName}}</p>
+		<!-- Recent Sermons -->
+		<ion-row>
+			<ion-col>
+				<h2>Recent sermons</h2>
+			</ion-col>
+			<ion-col class="ion-text-right">
+				<a [routerLink]="['/search']">View more</a>
+			</ion-col>
+		</ion-row>
+		<app-skeleton *ngIf="loadingSermons" type="cards"></app-skeleton>
+		<div class="scroll-x" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
+			<ion-card *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/play', sermon.sermon_id]">
+				<ion-img src="{{sermon.series_image}}" alt="{{sermon.sermon_title}}"></ion-img>
+				<ion-card-header>
+					<ion-card-title class="nowrap">{{sermon.sermon_title}}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+					{{sermon.speaker_name}}<br />
+					{{sermon.sermon_date | date: 'mediumDate'}}<br />
+					{{sermon.series_name}}
+				</ion-card-content>
+			</ion-card>
+		</div>
+
+		<!-- Recent Series -->
+		<ion-row>
+			<ion-col>
+				<h2>Latest series</h2>
+			</ion-col>
+			<ion-col class="ion-text-right">
+				<a [routerLink]="['/browse/series']">View more</a>
+			</ion-col>
+		</ion-row>
+		<app-skeleton *ngIf="loadingSeries" type="cards"></app-skeleton>
+		<div class="scroll-x" *ngIf="!loadingSeries && seriesList && seriesList.series">
+			<ion-card *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]">
+				<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
+				<ion-card-header>
+					<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+					{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
+				</ion-card-content>
+			</ion-card>
+		</div>
+		<br />
+		<br />
+		<br />
 	</app-fixed-grid>
 </ion-content>
-
-
-		
