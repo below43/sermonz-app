@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,11 +9,17 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent
 {
-	constructor() { }
+	constructor(
+		private navController: NavController
+	) { }
 
 	appName: string = environment.appName;
 	home: string = environment.home;
 	homeUrl: string = environment.homeUrl;
 	copyright: string = environment.copyright;
 	year: number = new Date().getFullYear();
+
+	goHome() {
+		document.location.href = this.homeUrl;
+	}
 }

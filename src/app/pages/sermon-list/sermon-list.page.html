@@ -14,14 +14,15 @@
 	</ion-refresher>
 	<app-fixed-grid>
 		<app-header>
-		<h1>{{title}}</h1>
+			<h1>{{title}}</h1>
+			<ion-searchbar name="search" placeholder="Search sermons" inputmode="search" [(ngModel)]="searchTerm" mode="md" (ionChange)="search($event)"></ion-searchbar>
 		</app-header>
-		
+
 		@if (loadingSermons)
 		{
 		<app-skeleton type="list"></app-skeleton>
 		}
-		@else if (!sermonsList || sermonsList.row_count === 0)
+		@else if (!sermonsList)
 		{
 		<ion-row class="filters">
 			<ion-col>
@@ -30,6 +31,15 @@
 		</ion-row>
 		}
 		@else {
+
+		<ion-row class="filters chips">
+			<ion-col mode="ios">
+				<ion-chip [outline]="!filterSeries">Series<span *ngIf="filterSeries">{{filterSeries.series_name}}</span> <ion-icon name="filter-outline" *ngIf="!filterSpeaker"></ion-icon></ion-chip>
+				<ion-chip [outline]="!filterSpeaker">Speaker<span *ngIf="filterSpeaker">{{filterSpeaker.name}}</span>  <ion-icon name="filter-outline" *ngIf="!filterSpeaker"></ion-icon></ion-chip>
+				<ion-chip [outline]="!filterBook">Book<span *ngIf="filterBook">{{filterBook}}</span> <ion-icon name="filter-outline" *ngIf="!filterBook"></ion-icon></ion-chip>
+			</ion-col>
+		</ion-row>
+
 		<ion-row class="filters">
 			<ion-col>
 				<p class="filter-left">{{ sermonsList.row_count | number }} sermons found</p>

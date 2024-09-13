@@ -61,7 +61,12 @@ ion-card {
 		}
 	}
 }
+ion-menu.md ion-list#labels-list ion-list-header {
+  font-size: 16px;
 
-.hidden-for-desktop {
-	
+  margin-bottom: 18px;
+
+  color: #757575;
+
+  min-height: 26px;
 }

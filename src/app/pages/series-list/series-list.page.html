@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="!embedded">
 	<ion-toolbar>
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/browse"></ion-back-button>
@@ -38,7 +38,7 @@
 		</ion-row>
 
 		<ion-list>
-			<ion-item lines="inset" *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]" detail="true">
+			<ion-item lines="inset" *ngFor="let series of seriesList.series" detail="true" (click)="onSeriesSelected(series)">
 				<ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="series.series_thumb" />
 				</ion-thumbnail>

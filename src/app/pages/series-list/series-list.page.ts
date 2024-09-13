@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController, ViewDidEnter } from '@ionic/angular';
-import { Subject, takeUntil, timeout } from 'rxjs';
+import { Component, Input, OnInit, Output, ɵɵInputTransformsFeature } from '@angular/core';
+import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
+import { Subject, takeUntil, throwIfEmpty, timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,11 +13,14 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class SeriesListPage implements OnInit, ViewDidEnter
 {
+	@Input() embedded: boolean = false;
+	@Output() seriesSelected: Subject<Series> = new Subject<Series>();
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
-		private titleService: TitleService
+		private titleService: TitleService,
+		private navController: NavController
 	) { }
 
 	title: string = 'Browse series';
@@ -104,7 +107,7 @@ export class SeriesListPage implements OnInit, ViewDidEnter
 
 	loadData(event: any)
 	{
-		if (this.seriesList && this.seriesList.page_number < (this.seriesList.row_count /  this.seriesList.page_size))
+		if (this.seriesList && this.seriesList.page_number < (this.seriesList.row_count / this.seriesList.page_size))
 		{
 			this.seriesList.page_number++;
 			this.loadObject(false, event);
@@ -112,6 +115,18 @@ export class SeriesListPage implements OnInit, ViewDidEnter
 		else if (event)
 		{
 			event.target.complete();
+		}
+	}
+
+	onSeriesSelected(series: Series)
+	{
+		if (this.embedded)
+		{
+			this.seriesSelected.next(series);
+		}
+		else
+		{
+			this.navController.navigateForward(`series/${series.series_id}`);
 		}
 	}
 }

@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
+import { Series } from 'src/app/models/series.model';
 import { SermonsList } from 'src/app/models/sermons.model';
+import { Speaker } from 'src/app/models/speakers.model';
 import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 
@@ -14,6 +16,10 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class SermonListPage implements OnInit, ViewDidEnter
 {
+	searchTerm: string = '';
+	filterSpeaker: Speaker | null = null;
+	filterSeries: Series | null = null;
+	filterBook: string = '';
 
 	constructor(
 		private apiService: ApiService,
@@ -59,7 +65,7 @@ export class SermonListPage implements OnInit, ViewDidEnter
 
 		const pageNumber = this.sermonsList ? this.sermonsList.page_number : 1;
 		
-		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, '', '', undefined, undefined, 'sermon_date', 'desc')
+		this.apiService.getSermonsCached(refresh, pageNumber, constants.defaultPageSize, this.searchTerm, '', undefined, undefined, 'sermon_date', 'desc')
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({
@@ -129,4 +135,11 @@ export class SermonListPage implements OnInit, ViewDidEnter
 	  const currentY = event.detail.scrollTop;
 	  this.showHeader = currentY > 60; 
 	}
+
+	search(ev: any)
+	{
+		console.log (this.searchTerm);
+		this.sermonsList = null;
+		this.loadSermonsObject(false);
+	}	
 }

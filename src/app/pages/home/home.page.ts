@@ -17,6 +17,10 @@ import { environment } from 'src/environments/environment';
 export class HomePage implements OnInit, ViewDidEnter
 {
 	appName: string = environment.appName;
+	home: string = environment.home;
+	homeUrl: string = environment.homeUrl;
+	copyright: string = environment.copyright;
+	year: number = new Date().getFullYear();
 
 	constructor(
 		private apiService: ApiService,
@@ -55,7 +59,7 @@ export class HomePage implements OnInit, ViewDidEnter
 	loadSeriesObject(refresh: boolean, event?: any)
 	{
 		const pageNumber = 1;
-		this.apiService.getSeriesListCached(refresh, pageNumber, 5)
+		this.apiService.getSeriesListCached(refresh, pageNumber, 10)
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({

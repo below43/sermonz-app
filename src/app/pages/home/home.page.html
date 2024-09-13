@@ -17,7 +17,7 @@
 		<!-- Recent Sermons -->
 		<ion-row>
 			<ion-col>
-				<h2>Recent sermons</h2>
+				<h2>Recent talks</h2>
 			</ion-col>
 			<ion-col class="ion-text-right">
 				<a [routerLink]="['/search']">View more</a>
@@ -41,7 +41,7 @@
 		<!-- Recent Series -->
 		<ion-row>
 			<ion-col>
-				<h2>Latest series</h2>
+				<h2>Recent sermon series</h2>
 			</ion-col>
 			<ion-col class="ion-text-right">
 				<a [routerLink]="['/browse/series']">View more</a>
@@ -51,16 +51,32 @@
 		<div class="scroll-x" *ngIf="!loadingSeries && seriesList && seriesList.series">
 			<ion-card *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]">
 				<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
-				<ion-card-header>
+				<!-- <ion-card-header>
 					<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
 				</ion-card-header>
 				<ion-card-content>
 					{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
-				</ion-card-content>
+				</ion-card-content> -->
 			</ion-card>
 		</div>
 		<br />
-		<br />
+		<ion-list id="labels-list" class="ion-hide-lg-up">
+			<ion-item lines="none" detail="true" detail-icon="logo-rss" [routerLink]="['/home/about']">
+				<ion-label>Podcast</ion-label>
+			</ion-item>
+			<ion-item lines="none" detail="true" [routerLink]="['/home/about']">
+				<ion-label>About</ion-label>
+			</ion-item>
+			<ion-item lines="none" detail="true" detail-icon="open-outline">
+				<ion-label>{{home}} Home</ion-label>
+			</ion-item>
+		</ion-list>
+		<ion-list style="margin: 0; padding: 2px 0 4px 0; border-top: 1px solid var(--ion-color-light)">
+			<ion-item lines="none" style="font-size: 10px;">
+				<ion-label>&copy; {{copyright}} {{year}}</ion-label>
+				<ion-label slot="end" style="text-align:right">Powered by <a href="https://sermo.nz">sermo.nz</a></ion-label>
+			</ion-item>
+		</ion-list>
 		<br />
 	</app-fixed-grid>
 </ion-content>
