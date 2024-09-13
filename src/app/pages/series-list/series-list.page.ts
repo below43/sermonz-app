@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, ɵɵInputTransformsFeature } from '@angular/core';
-import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, ModalController, NavController, ViewDidEnter } from '@ionic/angular';
 import { Subject, takeUntil, throwIfEmpty, timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
@@ -14,25 +14,25 @@ import { TitleService } from 'src/app/services/title.service';
 export class SeriesListPage implements OnInit, ViewDidEnter
 {
 	@Input() embedded: boolean = false;
-	@Output() seriesSelected: Subject<Series> = new Subject<Series>();
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
 		private titleService: TitleService,
-		private navController: NavController
+		private navController: NavController,
+		private modalController: ModalController
 	) { }
 
 	title: string = 'Browse series';
 	ngOnInit()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 		this.loadObject(false);
 	}
 
 	ionViewDidEnter()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;
@@ -122,11 +122,21 @@ export class SeriesListPage implements OnInit, ViewDidEnter
 	{
 		if (this.embedded)
 		{
-			this.seriesSelected.next(series);
+			//dismiss the modal with the series
+			this.modalController.dismiss(
+				{
+					series: series
+				}
+			);
 		}
 		else
 		{
-			this.navController.navigateForward(`series/${series.series_id}`);
+			this.navController.navigateForward(`browse/series/${series.series_id}`);
 		}
+	}
+
+	closeModal()
+	{
+		this.modalController.dismiss();
 	}
 }

@@ -1,7 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, ModalController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
@@ -17,7 +17,7 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class SpeakerPage implements  OnInit, ViewDidEnter
 {
-
+	
 	id: string | null = null;
 	
 	constructor(

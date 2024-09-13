@@ -1,7 +1,10 @@
-<ion-header [translucent]="true" *ngIf="!embedded">
+<ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button defaultHref="/browse"></ion-back-button>
+			<ion-back-button defaultHref="/browse" *ngIf="!embedded"></ion-back-button>
+			<ion-button (click)="closeModal()" *ngIf="embedded">
+				<ion-icon slot="icon-only" name="close"></ion-icon>
+			</ion-button>
 		</ion-buttons>
 		<ion-title>{{title}}</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>

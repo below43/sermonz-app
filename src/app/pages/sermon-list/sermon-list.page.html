@@ -34,9 +34,24 @@
 
 		<ion-row class="filters chips">
 			<ion-col mode="ios">
-				<ion-chip [outline]="!filterSeries">Series<span *ngIf="filterSeries">{{filterSeries.series_name}}</span> <ion-icon name="filter-outline" *ngIf="!filterSpeaker"></ion-icon></ion-chip>
-				<ion-chip [outline]="!filterSpeaker">Speaker<span *ngIf="filterSpeaker">{{filterSpeaker.name}}</span>  <ion-icon name="filter-outline" *ngIf="!filterSpeaker"></ion-icon></ion-chip>
-				<ion-chip [outline]="!filterBook">Book<span *ngIf="filterBook">{{filterBook}}</span> <ion-icon name="filter-outline" *ngIf="!filterBook"></ion-icon></ion-chip>
+				<ion-chip (click)="onFilterSeriesClicked($event)" [outline]="!filterSeries">
+					<span *ngIf="!filterSeries">Series</span>
+					<span *ngIf="filterSeries">{{filterSeries.series_name}}</span> 
+					<ion-icon name="filter-outline" *ngIf="!filterSeries"></ion-icon>
+					<ion-icon name="close" *ngIf="filterSeries"></ion-icon>
+				</ion-chip>
+				<ion-chip (click)="onFilterSpeakerClicked($event)" [outline]="!filterSpeaker">
+					<span *ngIf="!filterSpeaker">Speaker</span>  
+					<ion-icon name="filter-outline" *ngIf="!filterSpeaker"></ion-icon>
+					<span *ngIf="filterSpeaker">{{filterSpeaker.name}}</span>
+					<ion-icon name="close" *ngIf="filterSpeaker"></ion-icon>
+				</ion-chip>
+				<ion-chip (click)="onFilterBookClicked($event)" [outline]="!filterBook">
+					<span *ngIf="!filterBook">Book</span>
+					<span *ngIf="filterBook">{{filterBook}}</span>
+					<ion-icon name="filter-outline" *ngIf="!filterBook"></ion-icon>
+					<ion-icon name="close" *ngIf="filterBook"></ion-icon>
+				</ion-chip>
 			</ion-col>
 		</ion-row>
 

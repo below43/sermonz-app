@@ -1,7 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, ModalController, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { SermonsList } from 'src/app/models/sermons.model';
@@ -16,25 +16,27 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class SpeakerListPage implements OnInit, ViewDidEnter
 {
+	@Input() embedded: boolean = false;
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute,
 		private navController: NavController,
-		private titleService: TitleService
+		private titleService: TitleService,
+		private modalController: ModalController
 	) { }
 
 	title: string = 'Browse speakers';
 	ngOnInit()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 		this.loadSpeakersObject(false);
 	}
 
 	ionViewDidEnter()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;
@@ -147,7 +149,27 @@ export class SpeakerListPage implements OnInit, ViewDidEnter
 					}
 				}
 			});
+	}
 
-			
+	onSpeakerSelected(speaker: Speaker)
+	{
+		if (this.embedded)
+		{
+			//dismiss the modal with the series
+			this.modalController.dismiss(
+				{
+					speaker: speaker
+				}
+			);
+		}
+		else
+		{
+			this.navController.navigateForward(`browse/speakers/${speaker.id}`);
+		}
+	}
+
+	closeModal()
+	{
+		this.modalController.dismiss();
 	}
 }

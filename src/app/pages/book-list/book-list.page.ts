@@ -1,7 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AlertController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, ModalController, NavController, ViewDidEnter } from '@ionic/angular';
 import { Subject, takeUntil, timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Book } from 'src/app/models/books.model';
@@ -16,23 +16,26 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class BookListPage implements OnInit, ViewDidEnter
 {
+	@Input() embedded: boolean = false;
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
-		private titleService: TitleService
+		private titleService: TitleService,
+		private navController: NavController,
+		private modalController: ModalController
 	) { }
 
 	title: string  = 'Browse books of the Bible';
 	ngOnInit()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 		this.loadObject(false);
 	}
 
 	ionViewDidEnter()
 	{
-		this.titleService.setTitle(this.title);
+		if (!this.embedded) this.titleService.setTitle(this.title);
 	}
 
 	loading: boolean = false;
@@ -114,4 +117,19 @@ export class BookListPage implements OnInit, ViewDidEnter
 
 	}
 
+	onBookClicked(book: string)
+	{
+		if (this.embedded) {
+			this.modalController.dismiss( { book: book });
+		}
+		else 
+		{
+			this.navController.navigateForward(`/browse/books/${book}`);
+		}
+	}
+
+	closeModal()
+	{
+		this.modalController.dismiss();
+	}
 }
