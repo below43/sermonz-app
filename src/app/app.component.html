@@ -37,7 +37,7 @@
 					<ion-item lines="none" detail="true" [routerLink]="'home/about'" >
 						<ion-label>About</ion-label>
 					</ion-item>
-					<ion-item lines="none" detail="true" detail-icon="logo-rss" [routerLink]="'home/podcast'" >
+					<ion-item lines="none" detail="true" detail-icon="logo-rss" [routerLink]="'home/podcast'" *ngIf="podcast">
 						<ion-label>Podcast</ion-label>
 					</ion-item>
 					<ion-item lines="none" detail="true" detail-icon="open-outline" (click)="goHome()">

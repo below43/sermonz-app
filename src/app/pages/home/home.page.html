@@ -27,10 +27,10 @@
 		<div class="scroll-x" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
 			<ion-card *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/play', sermon.sermon_id]">
 				<ion-img src="{{sermon.series_image}}" alt="{{sermon.sermon_title}}"></ion-img>
-				<ion-card-header>
-					<ion-card-title class="nowrap">{{sermon.sermon_title}}</ion-card-title>
+				<ion-card-header xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75);">
+					<ion-card-title class="nowrap" xstyle=" color: var(--ion-color-secondary-contrast)">{{sermon.sermon_title}}</ion-card-title>
 				</ion-card-header>
-				<ion-card-content>
+				<ion-card-content xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75); color: var(--ion-color-secondary-contrast)">
 					{{sermon.speaker_name}}<br />
 					{{sermon.sermon_date | date: 'mediumDate'}}<br />
 					{{sermon.series_name}}
@@ -51,17 +51,11 @@
 		<div class="scroll-x" *ngIf="!loadingSeries && seriesList && seriesList.series">
 			<ion-card *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]">
 				<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
-				<!-- <ion-card-header>
-					<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
-				</ion-card-header>
-				<ion-card-content>
-					{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
-				</ion-card-content> -->
 			</ion-card>
 		</div>
 		<br />
 		<ion-list id="labels-list" class="ion-hide-lg-up">
-			<ion-item lines="none" detail="true" detail-icon="logo-rss" [routerLink]="['/home/about']">
+			<ion-item lines="none" detail="true" detail-icon="logo-rss" [routerLink]="['/home/about']" *ngIf="podcast">
 				<ion-label>Podcast</ion-label>
 			</ion-item>
 			<ion-item lines="none" detail="true" [routerLink]="['/home/about']">

@@ -41,6 +41,8 @@ export class BookListPage implements OnInit, ViewDidEnter
 	loading: boolean = false;
 	loadingMore: boolean = false;
 	bookList: Book[] | null = null;
+	oldTestament: Book[] | null = null;
+	newTestament: Book[] | null = null;
 	booksActive: number = 0;
 
 	handleRefresh(event: any)
@@ -89,7 +91,11 @@ export class BookListPage implements OnInit, ViewDidEnter
 						};
 					});
 
+
 					this.bookList = bookList;
+					//split the booklist into two lists; one for Old Testament, and one for New Testament
+					this.oldTestament = bookList.slice(0, 39);
+					this.newTestament = bookList.slice(39);
 
 					this.loading = false;
 					this.loadingMore = false;

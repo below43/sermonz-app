@@ -17,7 +17,7 @@
 	</ion-refresher>
 	<app-fixed-grid>
 		@if (loading) {
-			<app-skeleton type="list"></app-skeleton>
+		<app-skeleton type="list"></app-skeleton>
 		}
 		@else if (!seriesList || seriesList.row_count === 0) {
 		<ion-card>
@@ -40,8 +40,8 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-list>
-			<ion-item lines="inset" *ngFor="let series of seriesList.series" detail="true" (click)="onSeriesSelected(series)">
+		<ion-list *ngIf="embedded">
+			<ion-item lines="inset" *ngFor="let series of seriesList.series" detail="true" (click)="onSeriesSelected(series)" class="ion-activatable">
 				<ion-thumbnail slot="start" class="letterbox-thumbnail">
 					<ion-img [src]="series.series_thumb" />
 				</ion-thumbnail>
@@ -52,10 +52,26 @@
 			</ion-item>
 		</ion-list>
 
+		<ion-row *ngIf="!embedded">
+			<ion-col *ngFor="let series of seriesList.series" sizeMd="4" sizeSm="6" sizeXs="12">
+				<ion-card detail="true" (click)="onSeriesSelected(series)" class="ion-activatable">
+					<ion-img [src]="series.series_thumb" />
+					<ion-label class="ion-text-nowrap">
+						<ion-card-header>
+							<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
+						</ion-card-header>
+						<ion-card-content>
+							{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
+						</ion-card-content>
+					</ion-label>
+				</ion-card>
+			</ion-col>
+		</ion-row>
+
 		}
-		@if (loadingMore) 
+		@if (loadingMore)
 		{
-			<app-skeleton type="list"></app-skeleton>
+		<app-skeleton type="list"></app-skeleton>
 		}
 		<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" style="margin-top: 20px;">
 			<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more series...">

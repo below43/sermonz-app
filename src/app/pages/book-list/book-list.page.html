@@ -39,7 +39,18 @@
 		</ion-row>
 
 		<ion-list>
-			<ion-item lines="inset" *ngFor="let book of bookList" [detail]="book.active" [class.active]="book.active" [class.inactive]="!book.active" (click)="onBookClicked(book.name)">				<ion-label>
+			<ion-list-header><ion-label style="margin-top: 0; font-size: 14px; font-weight: 400; color: var(--ion-color-primary); opacity: 0.5;">Old Testament</ion-label></ion-list-header>
+			<ion-item lines="inset" *ngFor="let book of oldTestament" [detail]="book.active" [class.active]="book.active" [class.inactive]="!book.active" (click)="onBookClicked(book.name)">
+				<ion-label>
+					<h2>{{ book.name }}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+
+		<ion-list style="margin-top: 40px;">
+			<ion-list-header><ion-label style="font-size: 14px; font-weight: 400;  color: var(--ion-color-primary); opacity: 0.5;">New Testament</ion-label></ion-list-header>
+			<ion-item lines="inset" *ngFor="let book of newTestament" [detail]="book.active" [class.active]="book.active" [class.inactive]="!book.active" (click)="onBookClicked(book.name)">
+				<ion-label>
 					<h2>{{ book.name }}</h2>
 				</ion-label>
 			</ion-item>

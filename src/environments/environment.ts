@@ -3,12 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	production: false,
+	production: true,
 	apiUrl: '',
-	appName: '',
-	home: '',
-	homeUrl: '',
+	appName: 'Sermo.nz library',
+	home: 'Sermo.nz',
+	homeUrl: 'https://sermo.nz',
 	copyright: '',
+	podcast: '',
 };
 
 /*

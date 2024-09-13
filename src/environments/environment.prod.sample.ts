@@ -5,4 +5,5 @@ export const environment = {
 	home: 'Sermo.nz',
 	homeUrl: 'https://sermo.nz',
 	copyright: '',
+	podcast: '',
 };

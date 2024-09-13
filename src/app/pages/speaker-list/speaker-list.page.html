@@ -61,7 +61,7 @@
 <!-- Define the template for speaker items -->
 <ng-template #speakerItemTemplate let-speakers="speakers">
 	<ion-list>
-		<ion-item lines="inset" *ngFor="let speaker of speakers" (click)="onSpeakerSelected(speaker)"  detail="true">
+		<ion-item lines="inset" *ngFor="let speaker of speakers" (click)="onSpeakerSelected(speaker)"  detail="true" class="ion-activatable">
 			<ion-avatar slot="start">{{ speaker.initials }}</ion-avatar>
 			<ion-label>
 				<h2>{{ speaker.name }}</h2>

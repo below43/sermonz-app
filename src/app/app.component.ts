@@ -18,6 +18,7 @@ export class AppComponent
 	homeUrl: string = environment.homeUrl;
 	copyright: string = environment.copyright;
 	year: number = new Date().getFullYear();
+	podcast: string = environment.podcast;
 
 	goHome() {
 		document.location.href = this.homeUrl;

@@ -21,6 +21,7 @@ export class HomePage implements OnInit, ViewDidEnter
 	homeUrl: string = environment.homeUrl;
 	copyright: string = environment.copyright;
 	year: number = new Date().getFullYear();
+	podcast: string = environment.podcast;
 
 	constructor(
 		private apiService: ApiService,

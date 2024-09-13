@@ -1,3 +1,45 @@
-letterbox-thumbnail  {
-  width: 250px;
+letterbox-thumbnail {
+	width: 250px;
+}
+ion-card {
+	cursor: pointer;
+}
+
+ion-card {
+	cursor: pointer;
+
+	ion-card-title.nowrap {
+		//ellipsis
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	ion-card-title.wrap {
+		//allow wrapping
+		white-space: normal;
+		min-height: 40px;
+
+		font-size: 18px;
+	}
+	ion-card-content {
+		font-size: 12px;
+	}
+	&:hover {
+		--ion-card-background: #f4f4f4;
+		ion-img {
+			opacity: 0.5;
+		}
+	}
+}
+
+@media screen and (min-width: 576px) {
+	ion-card {
+		ion-card-title.wrap {
+			font-size: 14px;
+			min-height: 35px;
+		}
+		ion-card-content {
+			font-size: 10px;
+		}
+	}
 }
