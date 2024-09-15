@@ -1,13 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>play</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">play</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<app-fixed-grid>
+		<app-header>
+			<h1>Play</h1>
+		</app-header>
+
+		<p style="margin:16px">To play a talk <a [routerLink]="['/browse']">browse the library</a>, <a [routerLink]="['/home']">view latest</a>, or <a [routerLink]="['/search']">search our talks</a>.</p>
+	</app-fixed-grid>
+
 </ion-content>

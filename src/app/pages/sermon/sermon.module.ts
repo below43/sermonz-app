@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SermonPageRoutingModule } from './sermon-routing.module';
 
 import { SermonPage } from './sermon.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SermonPageRoutingModule
+    SermonPageRoutingModule,
+	SharedModule
   ],
   declarations: [SermonPage]
 })

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PlayPageRoutingModule } from './play-routing.module';
 
 import { PlayPage } from './play.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PlayPageRoutingModule
+    PlayPageRoutingModule,
+	SharedModule
   ],
   declarations: [PlayPage]
 })

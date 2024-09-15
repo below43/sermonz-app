@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 import { constants } from '../constants';
-import { SermonsList } from '../models/sermons.model';
+import { Sermon, SermonsList } from '../models/sermons.model';
 import { Series, SeriesList } from '../models/series.model';
 import { Speaker } from '../models/speakers.model';
 import { CacheService } from './cache.service';
@@ -170,6 +170,25 @@ export class ApiService
 	private getSpeakerById(id: number): Observable<Speaker>
 	{
 		return this.httpClient.get<Speaker>(`${environment.apiUrl}/speakers/${id}`);
+	}
+
+
+	// Cached version for getSermonById
+	public getSermonByIdCached(id: string, refreshCache = false): Observable<Sermon>
+	{
+		const cacheMilliseconds = 1 * 60 * 60000 * 24; //24 hour
+		const cacheKey = `${environment.apiUrl}sermon-id-${id}`;
+		if (refreshCache)
+		{
+			this.cacheService.clear(cacheKey);
+		}
+		return this.cacheService.get(cacheKey, this.getSermonById(id), cacheMilliseconds);
+	}
+
+	///api/v1/sermon/{id} - Get sermon by ID
+	private getSermonById(id: string): Observable<Sermon>
+	{
+		return this.httpClient.get<Sermon>(`${environment.apiUrl}/sermons/${id}`);
 	}
 
 }

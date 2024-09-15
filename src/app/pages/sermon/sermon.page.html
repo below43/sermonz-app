@@ -1,8 +1,78 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>sermon</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{title}}</ion-title>
+		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	@if (loading)
+	{
+	<app-fixed-grid>
+		<app-skeleton type="header"></app-skeleton>
+	</app-fixed-grid>
+
+	}
+	@else if (!sermon)
+	{
+	<app-fixed-grid>
+		<ion-card>
+			<ion-card-header>
+				<ion-card-title>No sermon found</ion-card-title>
+			</ion-card-header>
+			<ion-card-content>
+				<p>There is no sermon available for the given ID.</p>
+			</ion-card-content>
+		</ion-card>
+	</app-fixed-grid>
+
+	}
+	@else
+	{
+
+	<ion-grid>
+		<ion-row class="ion-padding-top ion-padding-bottom" style="background: var(--ion-color-light-shade)">
+			<ion-col sizeXs="10" offsetXs="1" sizeSm="8" offsetSm="2" sizeMd="6" offsetMd="3" style="text-align:center;">
+				<ion-img src="{{sermon.series_thumb}}" alt="Series Thumbnail" class="series-thumbnail"></ion-img>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<app-fixed-grid>
+		<ion-row>
+			<ion-col sizeXs="12" sizeSm="12" sizeMd="7" offsetMd="1">
+				<ion-list>
+					<ion-item lines="none">
+						<ion-label position="stacked">Title</ion-label>
+						{{ sermon.sermon_title }}
+					</ion-item>
+					<ion-item lines="none">
+						<ion-label position="stacked">Speaker</ion-label>
+						<a [routerLink]="['/browse/speakers', sermon.speaker_id]">{{ sermon.speaker_name }}</a>
+					</ion-item>
+					<ion-item lines="none">
+						<ion-label position="stacked">Date</ion-label>
+						{{ sermon.sermon_date | date: 'mediumDate' }}
+					</ion-item>
+					<ion-item lines="none">
+						<ion-label position="stacked">Passage</ion-label>
+						<a target="_blank" href="https://www.biblegateway.com/passage/?search={{sermon.passage}}&interface=print">{{ sermon.passage }}&nbsp;<ion-icon style="font-size: 14px;" name="open-outline"></ion-icon></a>
+					</ion-item>
+					<ion-item lines="none">
+						<ion-label position="stacked">Series</ion-label>
+						<a [routerLink]="['/browse/series/', sermon.series_id]">{{ sermon.series_name }}</a>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</app-fixed-grid>
+	<!-- <p>Sermon Video Embed Code: {{ sermon.sermon_video_embed_code }}</p> -->
+	<!-- <p>Sermon File: {{ sermon.sermon_file }}</p>-->
+
+	}
 </ion-content>

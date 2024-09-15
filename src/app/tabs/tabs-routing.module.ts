@@ -57,7 +57,7 @@ const routes: Routes = [
 						loadChildren: () => import('../pages/play/play.module').then(m => m.PlayPageModule)
 					},
 					{
-						path: 'sermons/:id',
+						path: ':id',
 						loadChildren: () => import('../pages/sermon/sermon.module').then(m => m.SermonPageModule)
 					},
 				]
