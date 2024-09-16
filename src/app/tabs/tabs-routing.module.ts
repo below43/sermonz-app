@@ -57,6 +57,10 @@ const routes: Routes = [
 						loadChildren: () => import('../pages/play/play.module').then(m => m.PlayPageModule)
 					},
 					{
+						path: ':id/:title',
+						loadChildren: () => import('../pages/sermon/sermon.module').then(m => m.SermonPageModule)
+					},
+					{
 						path: ':id',
 						loadChildren: () => import('../pages/sermon/sermon.module').then(m => m.SermonPageModule)
 					},

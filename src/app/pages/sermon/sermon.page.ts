@@ -1,13 +1,15 @@
 
 
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, NavController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { Sermon, SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
+import { MessageService } from 'src/app/services/message.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
@@ -19,13 +21,17 @@ export class SermonPage implements OnInit, ViewDidEnter
 {
 
 	id: string | null = null;
+	referrer: string = "/search";
 
 	constructor(
 		private apiService: ApiService,
 		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute,
 		private navController: NavController,
-		private titleService: TitleService
+		private titleService: TitleService,
+		private location: Location,
+		private messageService: MessageService
+
 	) { }
 
 	title: string = 'Sermon';
@@ -36,6 +42,17 @@ export class SermonPage implements OnInit, ViewDidEnter
 		this.id = id;
 
 		this.loadSermonObject(false);
+	}
+
+	goBack()
+	{
+		if (this.location.path() !== '')
+		{
+			this.location.back();
+		} else
+		{
+			this.navController.navigateRoot('/search');
+		}
 	}
 
 	ionViewDidEnter()
@@ -92,6 +109,8 @@ export class SermonPage implements OnInit, ViewDidEnter
 					{
 						event.target.complete();
 					}
+
+					this.messageService.activeTalk.next(this.id ?? '');
 				},
 				error: (error: any) =>
 				{
@@ -110,5 +129,4 @@ export class SermonPage implements OnInit, ViewDidEnter
 				}
 			});
 	}
-
 }

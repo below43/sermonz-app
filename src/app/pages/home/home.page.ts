@@ -60,7 +60,7 @@ export class HomePage implements OnInit, ViewDidEnter
 	loadSeriesObject(refresh: boolean, event?: any)
 	{
 		const pageNumber = 1;
-		this.apiService.getSeriesListCached(refresh, pageNumber, 10)
+		this.apiService.getSeriesListCached(refresh, pageNumber, 12)
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({
@@ -115,7 +115,7 @@ export class HomePage implements OnInit, ViewDidEnter
 
 		const pageNumber = 1;
 
-		this.apiService.getSermonsCached(refresh, pageNumber, 10, '', '', undefined, undefined, 'sermon_date', 'desc')
+		this.apiService.getSermonsCached(refresh, pageNumber, 12, '', '', undefined, undefined, 'sermon_date', 'desc')
 			.pipe(
 				timeout(constants.defaultTimeout)
 			).subscribe({

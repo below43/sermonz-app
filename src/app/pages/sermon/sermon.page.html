@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
+			<ion-icon (click)="goBack()" class="playback" slot="start" name="arrow-back-outline" style="margin-left: 12px; font-size: 24px; margin-right: 12px;"></ion-icon>
 		</ion-buttons>
 		<ion-title>{{title}}</ion-title>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
@@ -36,16 +36,16 @@
 	@else
 	{
 
-	<ion-grid>
-		<ion-row class="ion-padding-top ion-padding-bottom" style="background: var(--ion-color-light-shade)">
-			<ion-col sizeXs="10" offsetXs="1" sizeSm="8" offsetSm="2" sizeMd="6" offsetMd="3" style="text-align:center;">
+	<ion-grid style="padding: 0; margin: 0;">
+		<ion-row class="ion-padding-top ion-padding-bottom" style="background: var(--ion-color-light-shade); padding: 1px 0 0 0; margin: 0;">
+			<ion-col sizeXs="10" offsetXs="1" sizeSm="8" offsetSm="2" sizeMd="6" offsetMd="3" style="text-align:center; padding: 0; margin: 0">
 				<ion-img src="{{sermon.series_thumb}}" alt="Series Thumbnail" class="series-thumbnail"></ion-img>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
 	<app-fixed-grid>
 		<ion-row>
-			<ion-col sizeXs="12" sizeSm="12" sizeMd="7" offsetMd="1">
+			<ion-col>
 				<ion-list>
 					<ion-item lines="none">
 						<ion-label position="stacked">Title</ion-label>
@@ -68,6 +68,15 @@
 						<a [routerLink]="['/browse/series/', sermon.series_id]">{{ sermon.series_name }}</a>
 					</ion-item>
 				</ion-list>
+			</ion-col>
+		</ion-row>
+		<!-- show <audio> with src being sermon.sermon_file-->
+		<ion-row>
+			<ion-col>
+				<audio controls style="width: 100%; margin-top: 20px">
+					<source src="{{sermon.sermon_file}}" type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
 			</ion-col>
 		</ion-row>
 	</app-fixed-grid>

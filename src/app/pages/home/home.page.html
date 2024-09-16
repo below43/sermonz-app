@@ -24,7 +24,7 @@
 			</ion-col>
 		</ion-row>
 		<app-skeleton *ngIf="loadingSermons" type="cards"></app-skeleton>
-		<div class="scroll-x" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
+		<div class="scroll-x ion-hide-md-up" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
 			<ion-card *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/play', sermon.sermon_id]">
 				<ion-img src="{{sermon.series_image}}" alt="{{sermon.sermon_title}}"></ion-img>
 				<ion-card-header xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75);">
@@ -37,6 +37,23 @@
 				</ion-card-content>
 			</ion-card>
 		</div>
+		<div class="sermons ion-hide-md-down" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
+			<ion-row style="margin-top: 0; margin-bottom: 0;">
+				<ion-col sizeLg="4" sizeMd="6" sizeSm="6" sizeXs="12" *ngFor="let sermon of sermonsList.sermons">
+					<ion-list style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">
+						<ion-item class="sermon-item" lines="none" detail="true" [routerLink]="['/play', sermon.sermon_id]">
+							<ion-thumbnail slot="start" class="letterbox-thumbnail">
+								<ion-img [src]="sermon.series_thumb" />
+							</ion-thumbnail>
+							<ion-label class="ion-text-nowrap">
+								<h2>{{ sermon.sermon_title }}</h2>
+								<p>{{ sermon.sermon_date | date: 'mediumDate' }} &#8226; {{sermon.speaker_name}} {{sermon.passage == sermon.sermon_title ? '' : '&#8226; '+sermon.passage }}</p>
+							</ion-label>
+						</ion-item>
+					</ion-list>
+				</ion-col>
+			</ion-row>
+		</div>
 
 		<!-- Recent Series -->
 		<ion-row>
@@ -48,10 +65,19 @@
 			</ion-col>
 		</ion-row>
 		<app-skeleton *ngIf="loadingSeries" type="cards"></app-skeleton>
-		<div class="scroll-x" *ngIf="!loadingSeries && seriesList && seriesList.series">
+		<div class="scroll-x ion-hide-md-up" *ngIf="!loadingSeries && seriesList && seriesList.series">
 			<ion-card *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]">
 				<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
 			</ion-card>
+		</div>
+		<div class="ion-hide-md-down" *ngIf="!loadingSeries && seriesList && seriesList.series">
+			<ion-row style="margin-top: 0; margin-bottom: 0;">
+				<ion-col sizeLg="4" sizeMd="6" sizeSm="6" sizeXs="12" *ngFor="let series of seriesList.series">
+					<ion-card [routerLink]="['/browse/series', series.series_id]" style="width: 100%;">
+						<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
+					</ion-card>
+				</ion-col>
+			</ion-row>
 		</div>
 		<br />
 		<ion-list id="labels-list" class="ion-hide-lg-up">

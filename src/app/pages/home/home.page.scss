@@ -60,13 +60,30 @@ ion-card {
 			opacity: 0.5;
 		}
 	}
+	&.talk {
+		width: 350px;
+	}
 }
 ion-menu.md ion-list#labels-list ion-list-header {
-  font-size: 16px;
+	font-size: 16px;
 
-  margin-bottom: 18px;
+	margin-bottom: 18px;
 
-  color: #757575;
+	color: #757575;
 
-  min-height: 26px;
+	min-height: 26px;
+}
+
+.sermons {
+	ion-list ion-item ion-label {
+		h2,
+		p {
+			font-size: 0.95em;
+			margin-left: 0;
+		}
+		p { 
+			font-size: 0.8em;
+			margin-left: 0;
+		}
+	}
 }

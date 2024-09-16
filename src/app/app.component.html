@@ -25,7 +25,7 @@
 						</ion-item>
 					</ion-menu-toggle>
 					<ion-menu-toggle auto-hide="false">
-						<ion-item routerDirection="root" [routerLink]="'play'" lines="none" detail="false" routerLinkActive="selected">
+						<ion-item routerDirection="root" [routerLink]="'play/' + (activeTalk?activeTalk:'')" lines="none" detail="false" routerLinkActive="selected">
 							<ion-icon aria-hidden="true" slot="start" name="play"></ion-icon>
 							<ion-label>Play</ion-label>
 						</ion-item>
