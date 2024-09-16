@@ -5,7 +5,6 @@
 				<ion-list id="inbox-list">
 					<ion-list-header style="color: var(--ion-color-dark-shade)">{{appName}}</ion-list-header>
 					<ion-note style="color: var(--ion-color-dark-shade)">Sermon library app</ion-note>
-
 					<ion-menu-toggle auto-hide="false">
 						<ion-item routerDirection="root" [routerLink]="'home'" lines="none" detail="false" routerLinkActive="selected">
 							<ion-icon aria-hidden="true" slot="start" name="list-outline"></ion-icon>
@@ -44,6 +43,10 @@
 						<ion-label>{{home}} Home</ion-label>
 					</ion-item>
 				</ion-list>
+
+				<div style=" margin: 0 auto; text-align: center;">
+					<ion-icon src="/assets/icon/sermonz.svg" alt="App Logo" style="color: var(--ion-color-secondary); font-size: 85px; padding: 60px 0 20px; opacity: 0.15"></ion-icon>
+				</div>
 			</ion-content>
 
 			<ion-footer>

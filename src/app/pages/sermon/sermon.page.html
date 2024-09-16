@@ -4,6 +4,11 @@
 			<ion-icon (click)="goBack()" class="playback" slot="start" name="arrow-back-outline" style="margin-left: 12px; font-size: 24px; margin-right: 12px;"></ion-icon>
 		</ion-buttons>
 		<ion-title>{{title}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="downloadTalk()">
+                <ion-icon slot="icon-only" name="download"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 	</ion-toolbar>
 </ion-header>

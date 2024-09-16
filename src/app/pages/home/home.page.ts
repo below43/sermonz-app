@@ -186,4 +186,9 @@ export class HomePage implements OnInit, ViewDidEnter
 		const currentY = event.detail.scrollTop;
 		this.showHeader = currentY > 60;
 	}
+  
+	goHome()
+	{
+		document.location.href = this.homeUrl;
+	}
 }

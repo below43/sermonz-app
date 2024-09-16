@@ -1,13 +1,26 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>about</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons>
+			<ion-back-button defaultHref="/"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<app-fixed-grid>
+		<app-header>
+			<h1>About</h1>
+		</app-header>
+
+		<p style="margin:16px; font-weight: 300">
+			{{appName}} is powered by the <a href="https://github.com/below43/sermonz-app" style="text-decoration: none" target="_blank">sermo.nz app</a> which is built using Ionic Framework. Sermon.nz App and Ionic Framework is licensed under the MIT license.
+		</p>
+
+		<div style=" margin: 0 auto; text-align: center; cursor: pointer;">
+			<a href="https://sermo.nz" target="_blank"><ion-icon src="/assets/icon/sermonz.svg" alt="App Logo" style="color: var(--ion-color-secondary); font-size: 150px; padding: 60px 0 30px; opacity: 0.5"></ion-icon></a>
+			<br/>
+			<a href="https://sermo.nz" target="_blank" style="color: var(--ion-color-secondary); text-decoration: none; font-weight: 300; font-size: 18px; opacity: 1">sermo.nz</a>
+
+		</div>
+	</app-fixed-grid>
 </ion-content>

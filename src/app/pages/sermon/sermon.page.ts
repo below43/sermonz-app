@@ -129,4 +129,23 @@ export class SermonPage implements OnInit, ViewDidEnter
 				}
 			});
 	}
+
+	downloadTalk()
+	{
+		if (!this.sermon || !this.sermon.sermon_file)
+		{
+			console.error('No sermon file available for download.');
+			return;
+		}
+
+		// Create a temporary anchor element
+		const a = document.createElement('a');
+		//set target to _blank to open in new tab
+		a.target = '_blank';
+		a.href = this.sermon.sermon_file;
+		a.download = this.sermon.sermon_title || 'download'; // Use the sermon title as the filename, or default to 'download'
+		document.body.appendChild(a); // Append the anchor to the body to make it clickable
+		a.click(); // Simulate a click on the anchor
+		document.body.removeChild(a); // Clean up by removing the anchor from the body
+	}
 }

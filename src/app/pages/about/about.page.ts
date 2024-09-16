@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-about',
@@ -13,4 +14,16 @@ export class AboutPage implements OnInit {
   }
 
   loading: boolean = false;
+
+  appName: string = environment.appName;
+  home: string = environment.home;
+  homeUrl: string = environment.homeUrl;
+  copyright: string = environment.copyright;
+  year: number = new Date().getFullYear();
+  podcast: string = environment.podcast;
+
+  goHome()
+  {
+	  document.location.href = this.homeUrl;
+  }
 }
