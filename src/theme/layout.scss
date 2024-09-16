@@ -79,3 +79,14 @@ ion-list-header ion-label {
 	color: var(--ion-color-medium);
 	text-transform: uppercase;
 }
+
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+ion-toolbar ion-buttons ion-icon {
+	cursor: pointer;
+}

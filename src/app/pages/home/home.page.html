@@ -41,7 +41,7 @@
 			<ion-row style="margin-top: 0; margin-bottom: 0;">
 				<ion-col sizeLg="4" sizeMd="6" sizeSm="6" sizeXs="12" *ngFor="let sermon of sermonsList.sermons">
 					<ion-list style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">
-						<ion-item class="sermon-item" lines="none" detail="true" [routerLink]="['/play', sermon.sermon_id]">
+						<ion-item class="sermon-item" lines="none" detail="true" [routerLink]="['/play', sermon.sermon_id]" style=" border-top: 1px solid var(--ion-color-light-shade);">
 							<ion-thumbnail slot="start" class="letterbox-thumbnail">
 								<ion-img [src]="sermon.series_thumb" />
 							</ion-thumbnail>
@@ -68,6 +68,14 @@
 		<div class="scroll-x ion-hide-md-up" *ngIf="!loadingSeries && seriesList && seriesList.series">
 			<ion-card *ngFor="let series of seriesList.series" [routerLink]="['/browse/series', series.series_id]">
 				<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
+				<ion-label class="ion-text-nowrap">
+					<ion-card-header>
+						<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
+					</ion-card-header>
+					<ion-card-content>
+						{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
+					</ion-card-content>
+				</ion-label>
 			</ion-card>
 		</div>
 		<div class="ion-hide-md-down" *ngIf="!loadingSeries && seriesList && seriesList.series">
@@ -75,6 +83,14 @@
 				<ion-col sizeLg="4" sizeMd="6" sizeSm="6" sizeXs="12" *ngFor="let series of seriesList.series">
 					<ion-card [routerLink]="['/browse/series', series.series_id]" style="width: 100%;">
 						<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
+						<ion-label class="ion-text-nowrap">
+							<ion-card-header>
+								<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
+							</ion-card-header>
+							<ion-card-content>
+								{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
+							</ion-card-content>
+						</ion-label>
 					</ion-card>
 				</ion-col>
 			</ion-row>
