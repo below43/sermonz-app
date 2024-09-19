@@ -81,9 +81,18 @@ ion-menu.md ion-list#labels-list ion-list-header {
 			font-size: 0.95em;
 			margin-left: 0;
 		}
-		p { 
+		p {
 			font-size: 0.8em;
 			margin-left: 0;
 		}
 	}
+}
+
+.app-logo {
+	float: right;
+	color: var(--ion-color-secondary);
+	font-size: 60px;
+	margin-right: 20px;
+	margin-left: 4px;
+	opacity: 0.5;
 }
