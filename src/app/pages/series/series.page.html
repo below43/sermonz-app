@@ -60,7 +60,7 @@
 		</ion-row>
 
 		<ion-list>
-			<ion-item lines="inset" *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/play/', sermon.sermon_id]" routerDirection="forward" detail="true">
+			<ion-item lines="inset" *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/listen/', sermon.sermon_id]" routerDirection="forward" detail="true">
 				<ion-avatar slot="start" style="font-size: 12px; text-align: center; padding-top: 10px;">{{sermon.row_index}}</ion-avatar>
 				<ion-label class="ion-text-nowrap">
 					<h2>{{ sermon.sermon_title }}</h2>

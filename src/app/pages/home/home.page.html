@@ -25,7 +25,7 @@
 		</ion-row>
 		<app-skeleton *ngIf="loadingSermons" type="cards"></app-skeleton>
 		<div class="scroll-x ion-hide-md-up" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
-			<ion-card *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/play', sermon.sermon_id]">
+			<ion-card *ngFor="let sermon of sermonsList.sermons" [routerLink]="['/listen', sermon.sermon_id]">
 				<ion-img src="{{sermon.series_image}}" alt="{{sermon.sermon_title}}"></ion-img>
 				<ion-card-header xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75);">
 					<ion-card-title class="nowrap" xstyle=" color: var(--ion-color-secondary-contrast)">{{sermon.sermon_title}}</ion-card-title>
@@ -41,7 +41,7 @@
 			<ion-row style="margin-top: 0; margin-bottom: 0;">
 				<ion-col sizeLg="4" sizeMd="6" sizeSm="6" sizeXs="12" *ngFor="let sermon of sermonsList.sermons">
 					<ion-list style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">
-						<ion-item class="sermon-item" lines="none" detail="true" [routerLink]="['/play', sermon.sermon_id]" style=" border-top: 1px solid var(--ion-color-light-shade);">
+						<ion-item class="sermon-item" lines="none" detail="true" [routerLink]="['/listen', sermon.sermon_id]" style=" border-top: 1px solid var(--ion-color-light-shade);">
 							<ion-thumbnail slot="start" class="letterbox-thumbnail">
 								<ion-img [src]="sermon.series_thumb" />
 							</ion-thumbnail>
