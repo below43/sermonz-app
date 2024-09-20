@@ -48,7 +48,7 @@
 				</ion-thumbnail>
 				<ion-label class="ion-text-nowrap">
 					<h2>{{ sermon.sermon_title }}</h2>
-					<p>{{ sermon.sermon_date | date: 'mediumDate' }} &#8226; {{sermon.speaker_name}}</p>
+					<p>{{ sermon.sermon_date | date: 'mediumDate' }} &#8226; {{sermon.speaker_name}} {{sermon.passage.trim() == sermon.sermon_title.trim() ? '' : '&#8226; '+sermon.passage }}</p>
 				</ion-label>
 			</ion-item>
 		</ion-list>
