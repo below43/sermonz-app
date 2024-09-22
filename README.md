@@ -64,4 +64,5 @@ See: https://github.com/ionic-team/capacitor-assets
 ```
 npx @capacitor/assets generate --pwa
 mv icons src/icons
+mv src/assets/icons/* src/icons/ 
 ```
