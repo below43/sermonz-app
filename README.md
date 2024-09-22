@@ -41,6 +41,11 @@ or with live reload:
 ionic capacitor run  --livereload
 ```
 
+To build for prod:
+```
+ionic build --service-worker --prod --release
+```
+
 ### SSL Cert
 
 Generate a self-signed cert 
@@ -58,4 +63,5 @@ See: https://github.com/ionic-team/capacitor-assets
 
 ```
 npx @capacitor/assets generate --pwa
+mv icons src/icons
 ```
