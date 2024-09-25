@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "Sermo.nz",
+  "short_name": "Sermo.nz",
   "theme_color": "#DA4726",
   "background_color": "#fafafa",
   "display": "standalone",

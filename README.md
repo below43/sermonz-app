@@ -66,3 +66,10 @@ npx @capacitor/assets generate --pwa
 mv icons src/icons
 mv src/assets/icons/* src/icons/ 
 ```
+
+
+# Fetching from Sermo.nz Upstream
+```
+git fetch upstream
+git merge upstream/main
+```
