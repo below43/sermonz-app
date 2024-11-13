@@ -23,6 +23,7 @@ export interface Sermon
 	series_thumb: string;
 	series_image: string;
 	sermon_video_embed_code: null;
+	sermon_duration: number;
 
 	//transient fields
 	row_index: number;

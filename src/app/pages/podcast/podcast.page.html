@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons>
+			<ion-back-button defaultHref="/"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<app-fixed-grid>
+		<app-header>
+			<h1>{{appName}} Podcast</h1>
+		</app-header>
+
+		<p style="margin-left: 16px;font-weight: 400">
+			To add the podcast to your preferred podcast app, follow these instructions:
+		</p>
+
+
+		<h2 class="indent">Method 1: Launch podcast link</h2>
+		<ol>
+			<li>Open Apple Music on your computer.</li>
+			<li>Go to the "File" menu and select "Subscribe to Podcast..."</li>
+			<li>Click the copy icon above to copy the podcast URL.</li>
+			<li>Paste the URL into the subscription box and click "OK" to subscribe.</li>
+		</ol>
+		<ion-card style="font-weight: 400">
+			<ion-card-content>
+				<ion-label style="line-height:30px">{{this.podcast.replace('https', 'podcast')}}</ion-label>
+				<ion-button fill="clear" (click)="launchPodcastUrl()" style="cursor:pointer; float:right; margin-right: 10px; margin-top: -4px">
+					Launch Podcast&nbsp;&nbsp;<ion-icon name="open-outline"></ion-icon>
+				</ion-button>
+			</ion-card-content>
+		</ion-card>
+
+		<h2 class="indent">Method 2: Copy URL</h2>
+		<ol>
+			<li>Copy the URL</li>
+			<li>Paste the URL into the your favourite podcast app.</li>
+		</ol>
+		<ion-card style="font-weight: 400">
+			<ion-card-content>
+				<ion-label style="line-height:30px">{{this.podcast}}</ion-label>
+				<ion-button fill="clear" (click)="copyPodcastUrl()" style="cursor:pointer; float:right; margin-right: 10px; margin-top: -4px">
+					Copy URL&nbsp;&nbsp;<ion-icon name="copy-outline"></ion-icon>
+				</ion-button>
+			</ion-card-content>
+		</ion-card>
+
+	</app-fixed-grid>
+</ion-content>

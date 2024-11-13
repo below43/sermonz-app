@@ -64,6 +64,10 @@
 						<ion-label position="stacked">Date</ion-label>
 						{{ sermon.sermon_date | date: 'mediumDate' }}
 					</ion-item>
+					<ion-item lines="none" *ngIf="sermon.sermon_duration">
+						<ion-label position="stacked">Duration</ion-label>
+						{{ sermon.sermon_duration | duration }}
+					</ion-item>
 					<ion-item lines="none" *ngIf="sermon.passage">
 						<ion-label position="stacked">Passage</ion-label>
 						<a target="_blank" href="https://www.biblegateway.com/passage/?search={{sermon.passage}}&interface=print">{{ sermon.passage }}&nbsp;<ion-icon style="font-size: 14px;" name="open-outline"></ion-icon></a>
