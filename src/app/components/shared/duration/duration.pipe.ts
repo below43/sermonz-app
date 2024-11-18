@@ -6,8 +6,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DurationPipe implements PipeTransform
 {
 
-	transform(value: number): string
+	transform(input: string): string
 	{
+        // Check if value is in hh:mm:ss format
+        if (typeof input === 'string' && /^\d{2}:\d{2}:\d{2}$/.test(input))
+        {
+            return input;
+        }
+
+		const value = parseInt(input, 10);
+
 		if (!value)
 		{
 			return '00:00:00';
