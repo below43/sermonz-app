@@ -6,7 +6,7 @@
 					<ion-list-header style="color: var(--ion-color-dark-shade)">{{appName}}</ion-list-header>
 					<ion-note style="color: var(--ion-color-dark-shade)">Sermon library app</ion-note>
 					<ion-menu-toggle auto-hide="false" *ngIf="showBackLink">
-						<ion-item routerDirection="root" (click)="goHome()" lines="none" detail="false" routerLinkActive="selected">
+						<ion-item routerDirection="root" (click)="goHome()" lines="none" detail="false" routerLinkActive="selected" style="cursor:pointer">
 							<ion-icon aria-hidden="true" slot="start" name="chevron-back-outline"></ion-icon>
 							<ion-label>{{home}} Home</ion-label>
 						</ion-item>
