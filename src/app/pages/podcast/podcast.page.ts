@@ -23,14 +23,16 @@ export class PodcastPage implements OnInit
 	copyright: string = environment.copyright;
 	year: number = new Date().getFullYear();
 	podcast: string = environment.podcast;
+	podcast_apple: string = environment.podcast_apple;
+	podcast_spotify: string = environment.podcast_spotify;
 
 	goHome()
 	{
 		document.location.href = this.homeUrl;
 	}
+	
 	copyPodcastUrl()
 	{
-
 		const podcastUrl = this.podcast;
 		navigator.clipboard.writeText(podcastUrl).then(() =>
 		{
@@ -40,9 +42,20 @@ export class PodcastPage implements OnInit
 			console.error('Could not copy text: ', err);
 		});
 	}
-	launchPodcastUrl() 
+	
+	openUrl(url: 'podcast_apple' | 'podcast_spotify' | 'podcast') 
 	{
-		const podcastUrl = this.podcast.replace('https', 'podcast');
-		window.open(podcastUrl, '_blank');
+		switch (url) {
+			case 'podcast':
+				const podcastUrl = this.podcast.replace('https', 'podcast');
+				window.open(podcastUrl, '_blank');
+				break;
+			case 'podcast_apple':
+ 				window.open(this.podcast_apple, '_blank');
+				break;
+			case 'podcast_spotify':
+				window.open(this.podcast_spotify, '_blank');
+				break;
+		}
 	}
 }

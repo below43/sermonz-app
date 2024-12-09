@@ -10,12 +10,16 @@
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-fixed-grid>
+		<p class="backlink" *ngIf="showBackLink">
+			<ion-icon name="caret-back-outline" color="primary" class="back-icon"></ion-icon>
+			<ion-text lines="none" detail="true" detail-icon="open-outline" (click)="goHome()" color="primary">{{home}}</ion-text>
+		</p>
 		<ion-icon class="ion-hide-lg-up app-logo" src="/assets/icon/sermonz.svg" alt="App Logo"></ion-icon>
 		<app-header>
 			<h1>{{title}}</h1>
 		</app-header>
 		
-		<p class="ion-hide-lg-up">Welcome to {{appName}}</p>
+		<p class="ion-hide-lg-up">Welcome. Explore our talks...</p>
 		<!-- Recent Sermons -->
 		<ion-row>
 			<ion-col>

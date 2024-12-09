@@ -22,6 +22,7 @@ export class HomePage implements OnInit, ViewDidEnter
 	copyright: string = environment.copyright;
 	year: number = new Date().getFullYear();
 	podcast: string = environment.podcast;
+	showBackLink: boolean = false;
 
 	constructor(
 		private apiService: ApiService,
@@ -34,9 +35,31 @@ export class HomePage implements OnInit, ViewDidEnter
 	title: string = 'Latest';
 	ngOnInit()
 	{
+		//if mobile, title should be app name
+		if (window.innerWidth <= 990)
+		{
+			this.title = this.appName;
+		}
 		this.titleService.setTitle(this.title);
 		this.loadSermonsObject(false);
 		this.loadSeriesObject(false);
+
+		setTimeout(() =>
+		{
+			//if ?back=true is in the URL, show the back link
+			this.activatedRoute.queryParams.subscribe(params =>
+			{
+				if (params['back'] && params['back'] === 'true')
+				{
+					this.showBackLink = true;
+					//without causing any navigation, remove the query parameter from the url bar
+					const url = new URL(window.location.href);
+					url.searchParams.delete('back');
+					history.replaceState(null, '', url.toString());
+				}
+			});
+		}, 100);
+
 	}
 
 	ionViewDidEnter()
@@ -186,7 +209,7 @@ export class HomePage implements OnInit, ViewDidEnter
 		const currentY = event.detail.scrollTop;
 		this.showHeader = currentY > 60;
 	}
-  
+
 	goHome()
 	{
 		document.location.href = this.homeUrl;

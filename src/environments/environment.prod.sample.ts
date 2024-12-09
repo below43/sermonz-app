@@ -6,4 +6,6 @@ export const environment = {
 	homeUrl: 'https://sermo.nz',
 	copyright: '',
 	podcast: '',
+	podcast_spotify: '',
+	podcast_apple: '',
 };

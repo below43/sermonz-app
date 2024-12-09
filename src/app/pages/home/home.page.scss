@@ -96,3 +96,14 @@ ion-menu.md ion-list#labels-list ion-list-header {
 	margin-left: 4px;
 	opacity: 0.5;
 }
+
+ion-icon.back-icon {
+	position:relative;
+	top: 2px;
+}
+
+@media screen and (min-width: 992px) {
+	p.backlink {
+		display: none;
+	}
+}

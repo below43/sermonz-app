@@ -10,6 +10,8 @@ export const environment = {
 	homeUrl: 'https://sermo.nz',
 	copyright: '',
 	podcast: '',
+	podcast_apple: '',
+	podcast_spotify: ''
 };
 
 /*
