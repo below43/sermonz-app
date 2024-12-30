@@ -10,22 +10,22 @@
     <app-fixed-grid>
         <app-header>
             <h1>Podcast</h1>
-            <p><ion-text color="medium">To add the podcast to your preferred podcast app, choose from the following options:</ion-text></p>
+            <p>Subscribe to our podcast to receive the latest talks as they become available.<br/><br/><ion-text color="medium">To add the podcast to your preferred podcast app, choose from the following options:</ion-text></p>
         </app-header>
         <ion-list>
             <!-- Apple Podcasts -->
-            <ion-item button (click)="openUrl('podcast_apple')" detail-icon="open-outline" detail>
+            <ion-item button (click)="openUrl('podcast_apple')" detail-icon="open-outline" detail *ngIf="podcast_apple">
                 <ion-icon slot="start" name="logo-apple" src="assets/icon/icon-applepodcasts.svg"></ion-icon>
                 <ion-label>Apple Podcasts</ion-label>
             </ion-item>
             <!-- Spotify -->
-            <ion-item button (click)="openUrl('podcast_spotify')" detail-icon="open-outline" detail>
+            <ion-item button (click)="openUrl('podcast_spotify')" detail-icon="open-outline" detail *ngIf="podcast_spotify">
                 <ion-icon slot="start" src="assets/icon/icon-spotify.svg"></ion-icon>
                 <ion-label>Spotify</ion-label>
             </ion-item>
             <!-- Fallback for Apple Podcasts -->
-            <ion-item button (click)="openUrl('podcast')" *ngIf="!podcast_apple">
-                <ion-icon slot="start" name="icon-rss"></ion-icon>
+            <ion-item button (click)="openUrl('podcast')" *ngIf="!podcast_apple" detail-icon="open-outline" detail>
+                <ion-icon slot="start" name="logo-rss"></ion-icon>
                 <ion-label>Apple Podcasts</ion-label>
             </ion-item>
             <!-- Copy Podcast URL -->
