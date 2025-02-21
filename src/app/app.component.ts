@@ -3,7 +3,6 @@ import { NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './services/message.service';
 import { ActivatedRoute } from '@angular/router';
-import { WidgetType } from './embeddable-widget/embeddable-widget.component';
 
 @Component({
     selector: 'app-root',
@@ -26,7 +25,6 @@ export class AppComponent implements OnInit
 	year: number = new Date().getFullYear();
 	podcast: string = environment.podcast;
 	showBackLink: boolean = false;
-	widget: WidgetType | undefined = undefined;
 
 	goHome()
 	{
@@ -52,10 +50,6 @@ export class AppComponent implements OnInit
 			if (params['back'] && params['back'] === 'true')
 			{
 				this.showBackLink = true;
-			}
-			if (params['widget'])
-			{
-				this.widget = params['widget'] as WidgetType ?? undefined;
 			}
 		});
 	}

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, ɵɵInputTransformsFeature } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController, NavController, ViewDidEnter } from '@ionic/angular';
-import { Subject, takeUntil, throwIfEmpty, timeout } from 'rxjs';
+import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
 import { ApiService } from 'src/app/services/api.service';

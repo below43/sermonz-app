@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'; import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { EmbeddableWidgetComponent } from './embeddable-widget/embeddable-widget.component';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { EmbeddableWidgetComponent } from './embeddable-widget/embeddable-widget
 		IonicModule.forRoot(),
 		AppRoutingModule,
 		IonicStorageModule.forRoot(),
-		EmbeddableWidgetComponent,
 		ServiceWorkerModule.register('ngsw-worker.js', {
 			enabled: !isDevMode(),
 			// Register the ServiceWorker as soon as the application is stable

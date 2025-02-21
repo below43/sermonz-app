@@ -1,28 +1,39 @@
-import { Component, Input } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { timeout } from 'rxjs';
-import { constants } from '../constants';
-import { SermonsList } from '../models/sermons.model';
+import { constants } from 'src/app/constants';
+import { Sermon, SermonsList } from 'src/app/models/sermons.model';
+import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-embeddable-widget',
-    templateUrl: './embeddable-widget.component.html',
-    styleUrls: ['./embeddable-widget.component.scss'],
-    standalone: false
+  selector: 'app-embed',
+  templateUrl: './embed.page.html',
+  styleUrls: ['./embed.page.scss'],
+  standalone: false
 })
-export class EmbeddableWidgetComponent
+export class EmbedPage implements OnInit 
 {
-	@Input() type: WidgetType = 'mini';
-
 	public sermonsList: SermonsList | null = null;
 	public error: boolean = false;
 	public homeUrl: string = environment.homeUrl;
 	public appName: string = environment.appName;
 
+	public type: WidgetType = 'mini';
+
 	constructor(
+		private menuController: MenuController,
 		private apiService: ApiService
-	) { }
+	)
+	{
+
+	}
+
+	ngOnInit(): void
+	{
+		this.menuController.enable(false);
+		this.loadObject();
+	}
 
 	loading: boolean = false;
 	async loadObject()
@@ -51,7 +62,10 @@ export class EmbeddableWidgetComponent
 
 	}
 
-
+	loadSermon(sermon: Sermon)
+	{
+		window.open(`listen/${sermon.sermon_id}`, '_blank');
+	}
 }
 
-export type WidgetType = 'mini' | 'full';
+export type WidgetType = 'mini' | 'large';

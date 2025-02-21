@@ -10,10 +10,18 @@ const routes: Routes = [
 		path: 'about',
 		loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
 	},
-  {
-    path: 'podcast',
-    loadChildren: () => import('./pages/podcast/podcast.module').then( m => m.PodcastPageModule)
-  },
+	{
+		path: 'podcast',
+		loadChildren: () => import('./pages/podcast/podcast.module').then(m => m.PodcastPageModule)
+	},
+	{
+		path: 'embed',
+		loadChildren: () => import('./pages/embed/embed.module').then(m => m.EmbedPageModule)
+	},
+	{
+		path: 'splash',
+		loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
+	},
 ];
 @NgModule({
 	imports: [
