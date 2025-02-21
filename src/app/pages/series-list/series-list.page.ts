@@ -7,9 +7,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-	selector: 'app-series-list',
-	templateUrl: './series-list.page.html',
-	styleUrls: ['./series-list.page.scss'],
+    selector: 'app-series-list',
+    templateUrl: './series-list.page.html',
+    styleUrls: ['./series-list.page.scss'],
+    standalone: false
 })
 export class SeriesListPage implements OnInit, ViewDidEnter
 {

@@ -11,9 +11,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-  selector: 'app-speaker',
-  templateUrl: './speaker.page.html',
-  styleUrls: ['./speaker.page.scss'],
+    selector: 'app-speaker',
+    templateUrl: './speaker.page.html',
+    styleUrls: ['./speaker.page.scss'],
+    standalone: false
 })
 export class SpeakerPage implements  OnInit, ViewDidEnter
 {

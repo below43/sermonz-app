@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-	selector: 'app-podcast',
-	templateUrl: './podcast.page.html',
-	styleUrls: ['./podcast.page.scss'],
+    selector: 'app-podcast',
+    templateUrl: './podcast.page.html',
+    styleUrls: ['./podcast.page.scss'],
+    standalone: false
 })
 export class PodcastPage implements OnInit
 {

@@ -3,11 +3,13 @@ import { NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './services/message.service';
 import { ActivatedRoute } from '@angular/router';
+import { WidgetType } from './embeddable-widget/embeddable-widget.component';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: 'app.component.html',
-	styleUrls: ['app.component.scss'],
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit
 {
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit
 	year: number = new Date().getFullYear();
 	podcast: string = environment.podcast;
 	showBackLink: boolean = false;
+	widget: WidgetType | undefined = undefined;
 
 	goHome()
 	{
@@ -44,14 +47,16 @@ export class AppComponent implements OnInit
 			}
 		});
 
-
-		//if ?back=true is in the URL, show the back link
 		this.activatedRoute.queryParams.subscribe(params =>
 		{
 			if (params['back'] && params['back'] === 'true')
 			{
-				this.showBackLink = true;			
-			}			
+				this.showBackLink = true;
+			}
+			if (params['widget'])
+			{
+				this.widget = params['widget'] as WidgetType ?? undefined;
+			}
 		});
 	}
 }

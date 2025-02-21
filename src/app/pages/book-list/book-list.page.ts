@@ -10,9 +10,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-	selector: 'app-book-list',
-	templateUrl: './book-list.page.html',
-	styleUrls: ['./book-list.page.scss'],
+    selector: 'app-book-list',
+    templateUrl: './book-list.page.html',
+    styleUrls: ['./book-list.page.scss'],
+    standalone: false
 })
 export class BookListPage implements OnInit, ViewDidEnter
 {

@@ -3,9 +3,10 @@ import { ViewDidEnter } from '@ionic/angular';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-	selector: 'app-browse',
-	templateUrl: './browse.page.html',
-	styleUrls: ['./browse.page.scss'],
+    selector: 'app-browse',
+    templateUrl: './browse.page.html',
+    styleUrls: ['./browse.page.scss'],
+    standalone: false
 })
 export class BrowsePage implements OnInit, ViewDidEnter
 {

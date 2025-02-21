@@ -13,9 +13,10 @@ import { MessageService } from 'src/app/services/message.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-	selector: 'app-sermon',
-	templateUrl: './sermon.page.html',
-	styleUrls: ['./sermon.page.scss'],
+    selector: 'app-sermon',
+    templateUrl: './sermon.page.html',
+    styleUrls: ['./sermon.page.scss'],
+    standalone: false
 })
 export class SermonPage implements OnInit, ViewDidEnter
 {

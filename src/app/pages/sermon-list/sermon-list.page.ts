@@ -13,9 +13,10 @@ import { BookListPage } from '../book-list/book-list.page';
 import { SpeakerListPage } from '../speaker-list/speaker-list.page';
 
 @Component({
-	selector: 'app-sermon-list',
-	templateUrl: './sermon-list.page.html',
-	styleUrls: ['./sermon-list.page.scss'],
+    selector: 'app-sermon-list',
+    templateUrl: './sermon-list.page.html',
+    styleUrls: ['./sermon-list.page.scss'],
+    standalone: false
 })
 export class SermonListPage implements OnInit, ViewDidEnter
 {

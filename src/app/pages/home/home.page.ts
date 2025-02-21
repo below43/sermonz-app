@@ -10,9 +10,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 import { environment } from 'src/environments/environment';
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.page.html',
-	styleUrls: ['./home.page.scss'],
+    selector: 'app-home',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.scss'],
+    standalone: false
 })
 export class HomePage implements OnInit, ViewDidEnter
 {

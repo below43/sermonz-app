@@ -12,9 +12,10 @@ import { TitleService } from 'src/app/services/title.service';
 
 
 @Component({
-	selector: 'app-book',
-	templateUrl: './book.page.html',
-	styleUrls: ['./book.page.scss'],
+    selector: 'app-book',
+    templateUrl: './book.page.html',
+    styleUrls: ['./book.page.scss'],
+    standalone: false
 })
 export class BookPage implements OnInit, ViewDidEnter
 {

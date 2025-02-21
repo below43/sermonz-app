@@ -10,9 +10,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { TitleService } from 'src/app/services/title.service';
 
 @Component({
-  selector: 'app-speaker-list',
-  templateUrl: './speaker-list.page.html',
-  styleUrls: ['./speaker-list.page.scss'],
+    selector: 'app-speaker-list',
+    templateUrl: './speaker-list.page.html',
+    styleUrls: ['./speaker-list.page.scss'],
+    standalone: false
 })
 export class SpeakerListPage implements OnInit, ViewDidEnter
 {
