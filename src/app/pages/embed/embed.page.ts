@@ -111,6 +111,16 @@ export class EmbedPage implements OnInit
 	{
 		window.open(`browse/series/${series.series_id}`, '_blank');
 	}
+
+	viewMoreSermons()
+	{
+		window.open('search', '_blank');
+	}
+
+	viewMoreSeries()
+	{
+		window.open('browse/series', '_blank');
+	}
 }
 
 export type WidgetType = 'mini' | 'large';
