@@ -19,6 +19,10 @@ const routes: Routes = [
 		loadChildren: () => import('./pages/embed/embed.module').then(m => m.EmbedPageModule)
 	},
 	{
+		path: 'embed/:type',
+		loadChildren: () => import('./pages/embed/embed.module').then(m => m.EmbedPageModule)
+	},
+	{
 		path: 'splash',
 		loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
 	},

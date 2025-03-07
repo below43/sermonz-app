@@ -1,3 +1,7 @@
+:host,
+h2 {
+	--ion-text-color: var(--ion-color-dark);
+}
 .embed-sermon-list {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -23,5 +27,70 @@
 			--detail-icon-opacity: 0.5;
 			--ion-item-background: var(--ion-color-light-shade);
 		}
+	}
+}
+ion-row {
+	margin-bottom: 0;
+	ion-col {
+		h2 {
+			margin-left: 6px;
+			font-size: 18px;
+			color: var(--ion-color-dark);
+		}
+		a {
+			color: var(--ion-color-primary);
+			text-decoration: none;
+			font-size: 14px;
+			line-height: 24px;
+			position: relative;
+			top: 20px;
+		}
+	}
+}
+div.scroll-x {
+	padding-left: 0px;
+	margin-left: 0px;
+	padding-right: 14px;
+	// margin-right: -20px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	white-space: nowrap;
+	ion-card {
+		display: inline-block;
+	}
+	// max-height: 400px;
+	width: 100%;
+}
+
+ion-card {
+	width: 250px;
+	margin: 10px;
+	cursor: pointer;
+	ion-card-title {
+		font-size: 14px;
+	}
+	ion-card-title.nowrap {
+		//ellipsis
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	ion-card-title.wrap {
+		//allow wrapping
+		white-space: normal;
+		min-height: 40px;
+	}
+	ion-card-content {
+		font-size: 12px;
+	}
+	&:hover {
+		--ion-card-background: var(--ion-color-light);
+		ion-img {
+			opacity: 0.5;
+		}
+	}
+	&.talk {
+		width: 350px;
 	}
 }

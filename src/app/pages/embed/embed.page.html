@@ -1,6 +1,6 @@
 @if (type=='mini')
 {
-	@if (loading) {
+	@if (loadingSermons) {
 		<app-skeleton type="list"></app-skeleton>
 	}
 	@else {
@@ -19,7 +19,53 @@
 }
 @if (type == 'large')
 {
-large
+	<!-- Recent Sermons -->
+	<ion-row>
+		<ion-col>
+			<h2>Recent talks</h2>
+		</ion-col>
+		<ion-col class="ion-text-right">
+			<a [routerLink]="['/search']">View more</a>
+		</ion-col>
+	</ion-row>
+	<app-skeleton *ngIf="loadingSermons" type="cards"></app-skeleton>
+	<div class="scroll-x" *ngIf="!loadingSermons && sermonsList && sermonsList.sermons">
+		<ion-card *ngFor="let sermon of sermonsList.sermons" (click)="loadSermon(sermon)">
+			<ion-img src="{{sermon.series_image}}" alt="{{sermon.sermon_title}}"></ion-img>
+			<ion-card-header xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75);">
+				<ion-card-title class="nowrap" xstyle=" color: var(--ion-color-secondary-contrast)">{{sermon.sermon_title}}</ion-card-title>
+			</ion-card-header>
+			<ion-card-content xstyle="background: rgba(var(--ion-color-primary-rgb), 0.75); color: var(--ion-color-secondary-contrast)">
+				{{sermon.speaker_name}}<br />
+				{{sermon.sermon_date | date: 'mediumDate'}}<br />
+				{{sermon.series_name}}
+			</ion-card-content>
+		</ion-card>
+	</div>
+
+	<!-- Recent Series -->
+	<ion-row>
+		<ion-col>
+			<h2>Recent series</h2>
+		</ion-col>
+		<ion-col class="ion-text-right">
+			<a [routerLink]="['/browse/series']">View more</a>
+		</ion-col>
+	</ion-row>
+	<app-skeleton *ngIf="loadingSeries" type="cards"></app-skeleton>
+	<div class="scroll-x" *ngIf="!loadingSeries && seriesList && seriesList.series">
+		<ion-card *ngFor="let series of seriesList.series" (click)="loadSeries(series)">
+			<ion-img src="{{series.series_thumb}}" alt="{{series.series_name}}"></ion-img>
+			<ion-label class="ion-text-nowrap">
+				<ion-card-header>
+					<ion-card-title class="wrap">{{series.series_name}}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+					{{series.first_sermon_date | date: 'mediumDate'}} - {{series.last_sermon_date | date: 'mediumDate'}}
+				</ion-card-content>
+			</ion-label>
+		</ion-card>
+	</div>
 }
 @if (error) 
 {
