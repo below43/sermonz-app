@@ -20,7 +20,7 @@ export class EmbedPage implements OnInit
 	public homeUrl: string = environment.homeUrl;
 	public appName: string = environment.appName;
 
-	public type: WidgetType = 'mini';
+	public type: WidgetType = 'sermons';
 
 	constructor(
 		private menuController: MenuController,
@@ -35,10 +35,7 @@ export class EmbedPage implements OnInit
 	{
 
 		const type = this.activatedRoute.snapshot.paramMap.get('type');
-		if (type === 'large')
-		{
-			this.type = 'large';
-		}
+		this.type = (type == 'series') ? 'series' : 'sermons';
 
 		this.menuController.enable(false);
 		this.loadObject();
@@ -52,25 +49,28 @@ export class EmbedPage implements OnInit
 	{
 		this.loadingSermons = true;
 
-		this.apiService.getSermonsCached(false, 1, 6, '', '', undefined, undefined, 'sermon_date', 'desc')
-			.pipe(
-				timeout(constants.defaultTimeout)
-			).subscribe({
-				next: (response: SermonsList) =>
-				{
-					this.sermonsList = response;
+		if (this.type === 'sermons')
+		{
+			this.apiService.getSermonsCached(false, 1, 6, '', '', undefined, undefined, 'sermon_date', 'desc')
+				.pipe(
+					timeout(constants.defaultTimeout)
+				).subscribe({
+					next: (response: SermonsList) =>
+					{
+						this.sermonsList = response;
 
-					this.loadingSermons = false;
-				},
-				error: (error: any) =>
-				{
-					console.error(error);
-					this.loadingSermons = false;
-					this.error = true;
-				}
-			});
+						this.loadingSermons = false;
+					},
+					error: (error: any) =>
+					{
+						console.error(error);
+						this.loadingSermons = false;
+						this.error = true;
+					}
+				});
+		}
 
-		if (this.type === 'large')
+		if (this.type === 'series')
 		{
 			this.loadingSeries = true;
 			this.apiService.getSeriesListCached(false, 1, 6)
@@ -123,4 +123,4 @@ export class EmbedPage implements OnInit
 	}
 }
 
-export type WidgetType = 'mini' | 'large';
+export type WidgetType = 'sermons' | 'series';
