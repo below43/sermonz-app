@@ -76,10 +76,17 @@ export class SermonListPage implements OnInit, ViewDidEnter
 			).subscribe({
 				next: (response: SermonsList) =>
 				{
+					if (!response)
+					{
+						this.loadingSermons = false;
+						this.loadingMore = false;
+						console.error('No response');
+						return;
+					}
 					// console.log(response);
 					if (this.sermonsList && !refresh)
 					{
-						if (this.sermonsList.sermons)
+						if (response && response.sermons)
 						{
 							this.sermonsList.sermons = this.sermonsList.sermons.concat(response.sermons);
 							this.sermonsList.page_number = response.page_number;
