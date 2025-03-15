@@ -13,10 +13,10 @@ import { BookListPage } from '../book-list/book-list.page';
 import { SpeakerListPage } from '../speaker-list/speaker-list.page';
 
 @Component({
-    selector: 'app-sermon-list',
-    templateUrl: './sermon-list.page.html',
-    styleUrls: ['./sermon-list.page.scss'],
-    standalone: false
+	selector: 'app-sermon-list',
+	templateUrl: './sermon-list.page.html',
+	styleUrls: ['./sermon-list.page.scss'],
+	standalone: false
 })
 export class SermonListPage implements OnInit, ViewDidEnter
 {
@@ -79,9 +79,12 @@ export class SermonListPage implements OnInit, ViewDidEnter
 					// console.log(response);
 					if (this.sermonsList && !refresh)
 					{
-						this.sermonsList.sermons = this.sermonsList.sermons.concat(response.sermons);
-						this.sermonsList.page_number = response.page_number;
-						this.sermonsList.row_count = response.row_count;
+						if (this.sermonsList.sermons)
+						{
+							this.sermonsList.sermons = this.sermonsList.sermons.concat(response.sermons);
+							this.sermonsList.page_number = response.page_number;
+							this.sermonsList.row_count = response.row_count;
+						}
 					}
 					else
 					{
