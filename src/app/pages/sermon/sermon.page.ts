@@ -3,7 +3,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, IonRouterOutlet, NavController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, NavController, ToastController, ViewDidEnter } from '@ionic/angular';
 import { timeout } from 'rxjs';
 import { constants } from 'src/app/constants';
 import { Series, SeriesList } from 'src/app/models/series.model';
@@ -11,12 +11,13 @@ import { Sermon, SermonsList } from 'src/app/models/sermons.model';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageService } from 'src/app/services/message.service';
 import { TitleService } from 'src/app/services/title.service';
+import { FileTransfer } from '@capacitor/file-transfer';
 
 @Component({
-    selector: 'app-sermon',
-    templateUrl: './sermon.page.html',
-    styleUrls: ['./sermon.page.scss'],
-    standalone: false
+	selector: 'app-sermon',
+	templateUrl: './sermon.page.html',
+	styleUrls: ['./sermon.page.scss'],
+	standalone: false
 })
 export class SermonPage implements OnInit, ViewDidEnter
 {
@@ -31,8 +32,8 @@ export class SermonPage implements OnInit, ViewDidEnter
 		private navController: NavController,
 		private titleService: TitleService,
 		private location: Location,
-		private messageService: MessageService
-
+		private messageService: MessageService,
+		private toastController: ToastController,
 	) { }
 
 	title: string = 'Sermon';
@@ -139,17 +140,32 @@ export class SermonPage implements OnInit, ViewDidEnter
 			return;
 		}
 
-		// Create a temporary anchor element
-		const a = document.createElement('a');
-		//set target to _blank to open in new tab
-		a.target = '_blank';
-		a.href = this.sermon.sermon_file;
-		a.download = this.sermon.sermon_title || 'download'; // Use the sermon title as the filename, or default to 'download'
-		document.body.appendChild(a); // Append the anchor to the body to make it clickable
-		a.click(); // Simulate a click on the anchor
-		document.body.removeChild(a); // Clean up by removing the anchor from the body
+		const fileUrl = this.sermon.sermon_file;
+		const fileName = (this.sermon.sermon_title || 'download') + '.mp3';
+
+		// Use Capacitor FileTransfer to download the file
+		FileTransfer.downloadFile({
+			url: fileUrl,
+			path: fileName,
+		}).then(() =>
+		{
+			this.toastController.create({
+				message: 'Download complete: ' + fileName,
+				duration: 2000,
+				position: 'bottom'
+			}).then(toast => toast.present());
+
+		}).catch(error =>
+		{
+			console.error('Download failed:', error);
+			this.toastController.create({
+				message: 'Download failed: ' + error.message,
+				duration: 2000,
+				position: 'bottom'
+			}).then(toast => toast.present());
+		});
 	}
-	
+
 	shareTalk()
 	{
 		if (!this.sermon || !this.sermon.sermon_file)
@@ -164,7 +180,8 @@ export class SermonPage implements OnInit, ViewDidEnter
 			url: this.sermon.sermon_file
 		};
 
-		navigator.share(shareData).catch(error => {
+		navigator.share(shareData).catch(error =>
+		{
 			console.error('Error sharing:', error);
 		});
 	}
