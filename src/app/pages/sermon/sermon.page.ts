@@ -166,11 +166,6 @@ export class SermonPage implements OnInit, ViewDidEnter
 
 		navigator.share(shareData).catch(error => {
 			console.error('Error sharing:', error);
-			this.alertController.create({
-				header: 'Error',
-				message: 'An error occurred while trying to share the sermon.',
-				buttons: ['OK']
-			}).then(alert => alert.present());
 		});
 	}
 }
