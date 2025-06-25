@@ -4,9 +4,12 @@
 			<ion-icon (click)="goBack()" class="playback" slot="start" name="arrow-back-outline" style="margin-left: 12px; font-size: 24px; margin-right: 12px;"></ion-icon>
 		</ion-buttons>
 		<ion-title>{{title}}</ion-title>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" style="cursor:pointer">
+            <ion-button (click)="shareTalk()">
+                <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+            </ion-button>
             <ion-button (click)="downloadTalk()">
-                <ion-icon slot="icon-only" name="download"></ion-icon>
+                <ion-icon slot="icon-only" name="download-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
 		<ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
@@ -88,6 +91,18 @@
 				</audio>
 			</ion-col>
 		</ion-row>
+        <ion-row>
+            <ion-col style="text-align: center; margin-top: 16px;">
+                <ion-button fill="clear" (click)="shareTalk()">
+                    <ion-icon slot="start" name="share-outline"></ion-icon>
+                    Share this sermon
+                </ion-button>
+                <ion-button fill="clear" (click)="downloadTalk()">
+                    <ion-icon slot="start" name="download-outline"></ion-icon>
+                    Download this sermon
+                </ion-button>
+            </ion-col>
+        </ion-row>
 	</app-fixed-grid>
 	<!-- <p>Sermon Video Embed Code: {{ sermon.sermon_video_embed_code }}</p> -->
 	<!-- <p>Sermon File: {{ sermon.sermon_file }}</p>-->

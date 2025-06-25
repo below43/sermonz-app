@@ -149,4 +149,28 @@ export class SermonPage implements OnInit, ViewDidEnter
 		a.click(); // Simulate a click on the anchor
 		document.body.removeChild(a); // Clean up by removing the anchor from the body
 	}
+	
+	shareTalk()
+	{
+		if (!this.sermon || !this.sermon.sermon_file)
+		{
+			console.error('No sermon file available to share.');
+			return;
+		}
+
+		const shareData = {
+			title: this.sermon.sermon_title,
+			text: `Check out this sermon: ${this.sermon.sermon_title}`,
+			url: this.sermon.sermon_file
+		};
+
+		navigator.share(shareData).catch(error => {
+			console.error('Error sharing:', error);
+			this.alertController.create({
+				header: 'Error',
+				message: 'An error occurred while trying to share the sermon.',
+				buttons: ['OK']
+			}).then(alert => alert.present());
+		});
+	}
 }

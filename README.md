@@ -1,6 +1,5 @@
 # Sermo.nz App
-Sermo.nz App is an app for viewing and recording video input from endoscopes and boroscopes.
-
+the Sermo.nz website, providing a mobile-friendly interface for accessing sermons that are powered by a Sermo.nz API.
 [Website](https://sermo.nz)
 
 ## Source
